@@ -3,7 +3,7 @@ org = "ballerinax"
 name = "aws.redshift"
 version = "0.1.0"
 authors = ["Ballerina"]
-keywords = ["IT Operations/Cloud Services", "Cost/Paid"]
+keywords = ["Data Warehouse", "Columnar Storage", "Cost/Paid"]
 repository = "https://github.com/ballerina-platform/module-ballerinax-aws.redshift"
 icon = "icon.png"
 license = ["Apache-2.0"]
@@ -23,9 +23,3 @@ groupId = "io.ballerina.stdlib"
 artifactId = "sql-native"
 version = "1.11.0"
 path = "./lib/sql-native-1.11.0.jar"
-
-[[dependency]]
-org = "ballerinax"
-name = "aws.redshift.driver"
-version = "0.1.0"
-repository = "local"

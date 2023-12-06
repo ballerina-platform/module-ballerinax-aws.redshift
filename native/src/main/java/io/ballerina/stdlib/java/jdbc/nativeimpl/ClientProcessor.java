@@ -1,21 +1,21 @@
 /*
- * Copyright (c) 2022, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2023 WSO2 LLC. (https://www.wso2.com) All Rights Reserved.
  *
- * WSO2 Inc. licenses this file to you under the Apache License,
+ * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.
  * You may obtain a copy of the License at
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
+ * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
  */
- 
+
 package io.ballerina.stdlib.java.jdbc.nativeimpl;
 
 import io.ballerina.runtime.api.creators.ValueCreator;
@@ -30,9 +30,9 @@ import java.util.Locale;
 import java.util.Properties;
 
 /**
- * This class will include the native method implementation for the JDBC client.
+ * This class will include the native method implementation for the Redshift client.
  *
- * @since 1.0.0
+ * @since 0.1.0
  */
 public class ClientProcessor {
 
@@ -66,7 +66,7 @@ public class ClientProcessor {
                     if (propKey.toString().toLowerCase(Locale.ENGLISH).matches(Constants.CONNECT_TIMEOUT)) {
                         poolProperties = new Properties();
                         poolProperties.setProperty(Constants.POOL_CONNECTION_TIMEOUT,
-                                                   properties.getStringValue((BString) propKey).getValue());
+                                properties.getStringValue((BString) propKey).getValue());
                     }
                 }
             }
@@ -101,7 +101,7 @@ public class ClientProcessor {
         }
 
         return io.ballerina.stdlib.sql.nativeimpl.ClientProcessor.createClient(client, sqlDatasourceParams,
-                                                                               executeGKFlag, batchExecuteGKFlag);
+                executeGKFlag, batchExecuteGKFlag);
     }
 
     // Unable to perform a complete validation since URL differs based on the database.
