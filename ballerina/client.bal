@@ -21,6 +21,16 @@ import ballerina/sql;
 public isolated client class Client {
     *sql:Client;
 
+    # Initializes AWS Redshift client.
+    #
+    # + url - The JDBC URL of the database
+    # + user - If the database is secured, the username of the database
+    # + password - The password of the provided username of the database
+    # + options - The database-specific JDBC client properties
+    # + connectionPool - The sql:ConnectionPool object to be used within the JDBC client. 
+    # If there is no connectionPool provided, the global connection pool will be used and 
+    # it will be shared by other clients, which have the same properties
+    # + return - Possible error when creating the client
     public isolated function init(string url, string user, string password,
         Options? options = (), sql:ConnectionPool? connectionPool = ()) returns sql:Error? {
         ClientConfiguration clientConf = {
@@ -33,28 +43,44 @@ public isolated client class Client {
         return createClient(self, clientConf, sql:getGlobalConnectionPool());
     }
 
+    # Queries the database with the provided query and returns the result as a stream.
+    #
+    # + sqlQuery - The SQL query such as `SELECT * from Album WHERE name=${albumName}`
+    # + rowType - The typedesc of the record to which the result needs to be returned
+    # + return - Stream of records in the type of rowType
     remote isolated function query(sql:ParameterizedQuery sqlQuery, typedesc<record {}> rowType = <>)
     returns stream<rowType, sql:Error?> = @java:Method {
         'class: "io.ballerina.stdlib.java.jdbc.nativeimpl.QueryProcessor",
         name: "nativeQuery"
     } external;
 
+    # Executes the query, which is expected to return at most one row of the result. 
+    # If the query does not return any results, an sql:NoRowsError is returned.
+    #
+    # + sqlQuery - The SQL query such as `SELECT * from Album WHERE name=${albumName}`
+    # + returnType - The typedesc of the record to which the result needs to be returned. 
+    # It can be a basic type if the query result contains only one column
+    # + return - Result in the returnType type or an sql:Error
     remote isolated function queryRow(sql:ParameterizedQuery sqlQuery, typedesc<anydata> returnType = <>)
     returns returnType|sql:Error = @java:Method {
         'class: "io.ballerina.stdlib.java.jdbc.nativeimpl.QueryProcessor",
         name: "nativeQueryRow"
     } external;
 
+    # Executes the SQL query. Only the metadata of the execution is returned (not the results from the query).
+    #
+    # + sqlQuery - The SQL query such as `DELETE FROM Album WHERE artist=${artistName}`
+    # + return - Metadata of the query execution as an sql:ExecutionResult or an sql:Error
     remote isolated function execute(sql:ParameterizedQuery sqlQuery)
     returns sql:ExecutionResult|sql:Error = @java:Method {
         'class: "io.ballerina.stdlib.java.jdbc.nativeimpl.ExecuteProcessor",
         name: "nativeExecute"
     } external;
 
-    # Executes the SQL query with multiple sets of parameters in a batch. 
-    # Only the metadata of the execution is returned (not results from the query).
-    # If one of the commands in the batch fails, this will return an `sql:BatchExecuteError`. However, the driver may
-    # or may not continue to process the remaining commands in the batch after a failure.
+    # Executes the SQL query with multiple sets of parameters in a batch. Only the metadata of the execution 
+    # is returned (not results from the query). If one of the commands in the batch fails, this will return 
+    # an `sql:BatchExecuteError`. However, the driver may or may not continue to process the remaining 
+    # commands in the batch after a failure.
     #
     # + sqlQueries - The SQL query with multiple sets of parameters
     # + return - Metadata of the query execution as an `sql:ExecutionResult[]` or an `sql:Error`
@@ -76,7 +102,7 @@ public isolated client class Client {
         name: "nativeCall"
     } external;
 
-    # Closes the SQL client and shuts down the connection pool.
+    # Closes the client and shuts down the connection pool.
     #
     # + return - Possible error when closing the client
     public isolated function close() returns sql:Error? = @java:Method {
@@ -94,14 +120,6 @@ public type Options record {|
     map<anydata>? properties = ();
 |};
 
-# Constants to represent database operations.
-public enum Operations {
-    NONE,
-    EXECUTE,
-    BATCH_EXECUTE,
-    ALL
-}
-
 # An additional set of configurations for the JDBC Client to be passed internally within the module.
 #
 # + url - The JDBC URL to be used for the database connection
@@ -109,7 +127,7 @@ public enum Operations {
 # + password - The password of the database associated with the provided username
 # + options - The JDBC client properties
 # + connectionPool - The `sql:ConnectionPool` to be used for the connection. If there is no `connectionPool` provided,
-#                    the global connection pool (shared by all clients) will be used
+# the global connection pool (shared by all clients) will be used
 type ClientConfiguration record {|
     string? url;
     string? user;
@@ -119,7 +137,7 @@ type ClientConfiguration record {|
 |};
 
 isolated function createClient(Client jdbcClient, ClientConfiguration clientConf,
-    sql:ConnectionPool globalConnPool) returns sql:Error? = @java:Method {
+        sql:ConnectionPool globalConnPool) returns sql:Error? = @java:Method {
     'class: "io.ballerina.stdlib.java.jdbc.nativeimpl.ClientProcessor"
 } external;
 

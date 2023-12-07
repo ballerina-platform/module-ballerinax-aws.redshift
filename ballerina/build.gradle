@@ -16,7 +16,7 @@
  * under the License.
  */
 
-description = 'Ballerina - Snowflake Ballerina Connector'
+description = 'Ballerina - AWS Redshift Ballerina Connector'
 
 def tomlVersion = stripBallerinaExtensionVersion("${project.version}")
 
