@@ -8,11 +8,7 @@ Ballerina AWS Redshift Connector
 [![GraalVM Check](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/actions/workflows/build-with-bal-test-native.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/actions/workflows/build-with-bal-test-native.yml)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-The AWS Redshift connector for [Ballerina](https://ballerina.io/) facilitates seamless interaction with Amazon Redshift data warehouses, 
-enabling programmatic access to various applications, databases, APIs, and services through the Java Database 
-Connectivity (JDBC) API using Ballerina. This connector empowers users to execute a diverse set of standard Data 
-Definition Language (DDL) commands, SQL commands, and SQL functions for efficient querying of data sources within the 
-Amazon Redshift environment. Detailed reference.
+The AWS Redshift connector for [Ballerina](https://ballerina.io/) facilitates seamless interaction with Amazon Redshift data warehouses, enabling programmatic access to various applications, databases, APIs, and services through the Java Database Connectivity (JDBC) API using Ballerina. This connector empowers users to execute diverse set of standard Data Definition Language (DDL) commands, SQL commands, and SQL functions for efficient querying of data sources within the Amazon Redshift environment.
 
 For more information, go to the module(s).
 - [aws.redshift](Module.md)
