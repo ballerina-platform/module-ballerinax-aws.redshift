@@ -5,7 +5,7 @@
 
 [ballerina]
 dependencies-toml-version = "2"
-distribution-version = "2201.8.2"
+distribution-version = "2201.8.0"
 
 [[package]]
 org = "ballerina"
@@ -15,9 +15,6 @@ dependencies = [
 	{org = "ballerina", name = "jballerina.java"},
 	{org = "ballerina", name = "lang.value"}
 ]
-modules = [
-	{org = "ballerina", packageName = "io", moduleName = "io"}
-]
 
 [[package]]
 org = "ballerina"
@@ -25,15 +22,6 @@ name = "jballerina.java"
 version = "0.0.0"
 modules = [
 	{org = "ballerina", packageName = "jballerina.java", moduleName = "jballerina.java"}
-]
-
-[[package]]
-org = "ballerina"
-name = "lang.error"
-version = "0.0.0"
-scope = "testOnly"
-dependencies = [
-	{org = "ballerina", name = "jballerina.java"}
 ]
 
 [[package]]
@@ -65,19 +53,6 @@ modules = [
 
 [[package]]
 org = "ballerina"
-name = "test"
-version = "0.0.0"
-scope = "testOnly"
-dependencies = [
-	{org = "ballerina", name = "jballerina.java"},
-	{org = "ballerina", name = "lang.error"}
-]
-modules = [
-	{org = "ballerina", packageName = "test", moduleName = "test"}
-]
-
-[[package]]
-org = "ballerina"
 name = "time"
 version = "2.4.0"
 dependencies = [
@@ -89,22 +64,10 @@ org = "ballerinax"
 name = "aws.redshift"
 version = "0.1.0"
 dependencies = [
-	{org = "ballerina", name = "io"},
 	{org = "ballerina", name = "jballerina.java"},
-	{org = "ballerina", name = "sql"},
-	{org = "ballerina", name = "test"},
-	{org = "ballerinax", name = "aws.redshift.driver"}
+	{org = "ballerina", name = "sql"}
 ]
 modules = [
 	{org = "ballerinax", packageName = "aws.redshift", moduleName = "aws.redshift"}
-]
-
-[[package]]
-org = "ballerinax"
-name = "aws.redshift.driver"
-version = "0.1.0"
-scope = "testOnly"
-modules = [
-	{org = "ballerinax", packageName = "aws.redshift.driver", moduleName = "aws.redshift.driver"}
 ]
 
