@@ -16,26 +16,29 @@
  * under the License.
  */
 
-package io.ballerina.stdlib.java.jdbc.nativeimpl;
+package io.ballerina.lib.aws.redshift.nativeimpl;
 
 import io.ballerina.runtime.api.Environment;
 import io.ballerina.runtime.api.values.BArray;
 import io.ballerina.runtime.api.values.BObject;
-import io.ballerina.stdlib.sql.parameterprocessor.DefaultResultParameterProcessor;
 import io.ballerina.stdlib.sql.parameterprocessor.DefaultStatementParameterProcessor;
 
 /**
- * This class holds the utility methods involved with executing the call statements.
+ * This class contains methods for executing SQL queries.
  *
  * @since 0.1.0
  */
-public class CallProcessor { 
-    private CallProcessor() { 
+public class ExecuteProcessor {
+    private ExecuteProcessor() {
     }
-    
-    public static Object nativeCall(Environment env, BObject client, BObject paramSQLString, BArray recordTypes) {
-        return io.ballerina.stdlib.sql.nativeimpl.CallProcessor.nativeCall(env, client, paramSQLString,
-            recordTypes, DefaultStatementParameterProcessor.getInstance(),
-            DefaultResultParameterProcessor.getInstance());
+
+    public static Object nativeExecute(Environment env, BObject client, BObject paramSQLString) {
+        return io.ballerina.stdlib.sql.nativeimpl.ExecuteProcessor.nativeExecute(env, client, paramSQLString,
+                DefaultStatementParameterProcessor.getInstance());
+    }
+
+    public static Object nativeBatchExecute(Environment env, BObject client, BArray paramSQLStrings) {
+        return io.ballerina.stdlib.sql.nativeimpl.ExecuteProcessor.nativeBatchExecute(env, client, paramSQLStrings,
+                DefaultStatementParameterProcessor.getInstance());
     }
 }

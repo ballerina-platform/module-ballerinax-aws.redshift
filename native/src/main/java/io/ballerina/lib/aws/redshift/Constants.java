@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package io.ballerina.stdlib.java.jdbc;
+package io.ballerina.lib.aws.redshift;
 
 import io.ballerina.runtime.api.utils.StringUtils;
 import io.ballerina.runtime.api.values.BString;

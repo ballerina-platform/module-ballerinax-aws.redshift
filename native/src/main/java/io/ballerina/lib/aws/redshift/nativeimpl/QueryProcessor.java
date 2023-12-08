@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package io.ballerina.stdlib.java.jdbc.nativeimpl;
+package io.ballerina.lib.aws.redshift.nativeimpl;
 
 import io.ballerina.runtime.api.Environment;
 import io.ballerina.runtime.api.values.BObject;
