@@ -18,11 +18,11 @@
 
 package io.ballerina.lib.aws.redshift.nativeimpl;
 
+import io.ballerina.lib.aws.redshift.Constants;
 import io.ballerina.runtime.api.creators.ValueCreator;
 import io.ballerina.runtime.api.values.BMap;
 import io.ballerina.runtime.api.values.BObject;
 import io.ballerina.runtime.api.values.BString;
-import io.ballerina.lib.aws.redshift.Constants;
 import io.ballerina.stdlib.sql.datasource.SQLDatasource;
 import io.ballerina.stdlib.sql.utils.ErrorGenerator;
 

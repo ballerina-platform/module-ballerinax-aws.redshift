@@ -34,7 +34,7 @@ public isolated client class Client {
     public isolated function init(string url, string user, string password,
         Options? options = (), sql:ConnectionPool? connectionPool = ()) returns sql:Error? {
         ClientConfiguration clientConf = {
-            URL,
+            url,
             user,
             password,
             options,
@@ -50,7 +50,7 @@ public isolated client class Client {
     # + return - Stream of records in the type of rowType
     remote isolated function query(sql:ParameterizedQuery sqlQuery, typedesc<record {}> rowType = <>)
     returns stream<rowType, sql:Error?> = @java:Method {
-        'class: "QueryProcessor",
+        'class: "io.ballerina.lib.aws.redshift.nativeimpl.QueryProcessor",
         name: "nativeQuery"
     } external;
 
@@ -63,7 +63,7 @@ public isolated client class Client {
     # + return - Result in the returnType type or an sql:Error
     remote isolated function queryRow(sql:ParameterizedQuery sqlQuery, typedesc<anydata> returnType = <>)
     returns returnType|sql:Error = @java:Method {
-        'class: "QueryProcessor",
+        'class: "io.ballerina.lib.aws.redshift.nativeimpl.QueryProcessor",
         name: "nativeQueryRow"
     } external;
 
@@ -73,7 +73,7 @@ public isolated client class Client {
     # + return - Metadata of the query execution as an sql:ExecutionResult or an sql:Error
     remote isolated function execute(sql:ParameterizedQuery sqlQuery)
     returns sql:ExecutionResult|sql:Error = @java:Method {
-        'class: "ExecuteProcessor",
+        'class: "io.ballerina.lib.aws.redshift.nativeimpl.ExecuteProcessor",
         name: "nativeExecute"
     } external;
 
@@ -98,7 +98,7 @@ public isolated client class Client {
     # + return - Summary of the execution and results are returned in an `sql:ProcedureCallResult`, or an `sql:Error`
     remote isolated function call(sql:ParameterizedCallQuery sqlQuery, typedesc<record {}>[] rowTypes = [])
     returns sql:ProcedureCallResult|sql:Error = @java:Method {
-        'class: "CallProcessor",
+        'class: "io.ballerina.lib.aws.redshift.nativeimpl.CallProcessor",
         name: "nativeCall"
     } external;
 
@@ -106,7 +106,7 @@ public isolated client class Client {
     #
     # + return - Possible error when closing the client
     public isolated function close() returns sql:Error? = @java:Method {
-        'class: "ClientProcessor",
+        'class: "io.ballerina.lib.aws.redshift.nativeimpl.ClientProcessor",
         name: "close"
     } external;
 }
@@ -138,10 +138,10 @@ type ClientConfiguration record {|
 
 isolated function createClient(Client jdbcClient, ClientConfiguration clientConf,
         sql:ConnectionPool globalConnPool) returns sql:Error? = @java:Method {
-    'class: "ClientProcessor"
+    'class: "io.ballerina.lib.aws.redshift.nativeimpl.ClientProcessor"
 } external;
 
 isolated function nativeBatchExecute(Client sqlClient, string[]|sql:ParameterizedQuery[] sqlQueries)
 returns sql:ExecutionResult[]|sql:Error = @java:Method {
-    'class: "ExecuteProcessor"
+    'class: "io.ballerina.lib.aws.redshift.nativeimpl.ExecuteProcessor"
 } external;

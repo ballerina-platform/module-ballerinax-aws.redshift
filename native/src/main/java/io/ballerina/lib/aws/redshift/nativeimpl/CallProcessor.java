@@ -29,13 +29,13 @@ import io.ballerina.stdlib.sql.parameterprocessor.DefaultStatementParameterProce
  *
  * @since 0.1.0
  */
-public class CallProcessor { 
-    private CallProcessor() { 
+public class CallProcessor {
+    private CallProcessor() {
     }
-    
+
     public static Object nativeCall(Environment env, BObject client, BObject paramSQLString, BArray recordTypes) {
         return io.ballerina.stdlib.sql.nativeimpl.CallProcessor.nativeCall(env, client, paramSQLString,
-            recordTypes, DefaultStatementParameterProcessor.getInstance(),
-            DefaultResultParameterProcessor.getInstance());
+                recordTypes, DefaultStatementParameterProcessor.getInstance(),
+                DefaultResultParameterProcessor.getInstance());
     }
 }

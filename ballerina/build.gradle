@@ -16,10 +16,17 @@
  * under the License.
  */
 
+import org.apache.tools.ant.taskdefs.condition.Os
+
+plugins {
+    id 'io.ballerina.plugin'
+}
+
 description = 'Ballerina - AWS Redshift Ballerina Connector'
 
+def packageName = "aws.redshift"
+def packageOrg = "ballerinax"
 def tomlVersion = stripBallerinaExtensionVersion("${project.version}")
-
 def ballerinaTomlFilePlaceHolder = new File("${project.rootDir}/build-config/resources/Ballerina.toml")
 def ballerinaTomlFile = new File("$project.projectDir/Ballerina.toml")
 
@@ -33,8 +40,24 @@ def stripBallerinaExtensionVersion(String extVersion) {
             return extVersion
         }
     } else {
-        return extVersion.replace("${project.ext.snapshotVersion}", '')
+        return extVersion.replace("${project.ext.snapshotVersion}", "")
     }
+}
+
+ballerina {
+    packageOrganization = packageOrg
+    module = packageName
+    testCoverageParam = "--code-coverage --coverage-format=xml"
+    isConnector = true
+    platform = "java17"
+}
+
+configurations {
+    externalJars
+}
+
+dependencies {
+    externalJars(group: 'io.ballerina.stdlib', name: 'sql-native', version: "${stdlibSqlVersion}")
 }
 
 task updateTomlFiles {
@@ -46,49 +69,23 @@ task updateTomlFiles {
     }
 }
 
-task downloadExternalJars {
+task commitTomlFiles {
     doLast {
-        def configuration = configurations.detachedConfiguration(dependencies.create( "io.ballerina.stdlib:sql-native:${stdlibSqlVersion}"))
-        def libsDir = file('lib')
-        libsDir.mkdirs()
-        
-        copy {
-            from configuration.singleFile
-            into libsDir
+        project.exec {
+            ignoreExitValue true
+            if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+                commandLine 'cmd', '/c', "git commit -m \"[Automated] Update the toml files\" Ballerina.toml Dependencies.toml"
+            } else {
+                commandLine 'sh', '-c', "git commit -m '[Automated] Update the toml files' Ballerina.toml Dependencies.toml"
+            }
         }
     }
 }
 
-task build {
-    dependsOn ":${packageName}-native:build"
-    dependsOn updateTomlFiles
-    dependsOn downloadExternalJars
-    doLast {
-        executeBalCommand ("build", "${project.projectDir}")
-        executeBalCommand ("pack", "${project.projectDir}")
-        executeBalCommand ("push --repository=local", "${project.projectDir}")
-
-        def centralDir = file("${System.getProperty('user.home')}/.ballerina/repositories/central.ballerina.io/")
-        def cacheDirs = centralDir.listFiles().findAll { it.isDirectory() && it.name.startsWith('cache-') }
-        delete cacheDirs
-
-        def destinationDir = new File("${System.getProperty('user.home')}/.ballerina/repositories/central.ballerina.io/bala/ballerinax/${project.packageName}")
-        if (destinationDir.exists()) {
-            delete destinationDir;
-        }
-
-        copy {
-            from "${System.getProperty('user.home')}/.ballerina/repositories/local/bala/ballerinax/${project.packageName}"
-            into destinationDir
-        }
-    }
+clean {
+    delete 'build'
 }
 
-task test {
-    dependsOn ":${packageName}-native:build"
-    dependsOn updateTomlFiles
-    dependsOn downloadExternalJars
-    doLast {
-        executeBalCommand ("test", "${project.projectDir}")
-    }
-}
+build.dependsOn copyToLib
+build.dependsOn ":${packageName}-native:build"
+publish.dependsOn build
