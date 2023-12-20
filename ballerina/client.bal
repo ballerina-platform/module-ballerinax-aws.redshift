@@ -115,9 +115,18 @@ public isolated client class Client {
 #
 # + datasourceName - The driver class name to be used to get the connection
 # + properties - The database properties, which should be applied when getting the connection
+# + ssl - SSL configurations to be used
 public type Options record {|
     string? datasourceName = ();
     map<anydata>? properties = ();
+    SecureSocket ssl?;
+|};
+
+# The SSL configurations to be used when connecting to the Redshift server.
+#
+# + rootcert - File path of the SSL root certificate
+public type SecureSocket record {|
+    string rootcert?;
 |};
 
 # An additional set of configurations for the JDBC Client to be passed internally within the module.

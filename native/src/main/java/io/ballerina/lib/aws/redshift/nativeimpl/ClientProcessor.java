@@ -19,6 +19,7 @@
 package io.ballerina.lib.aws.redshift.nativeimpl;
 
 import io.ballerina.lib.aws.redshift.Constants;
+import io.ballerina.lib.aws.redshift.Utils;
 import io.ballerina.runtime.api.creators.ValueCreator;
 import io.ballerina.runtime.api.values.BMap;
 import io.ballerina.runtime.api.values.BObject;
@@ -57,11 +58,8 @@ public class ClientProcessor {
             properties = options.getMapValue(Constants.ClientConfiguration.PROPERTIES);
             BString dataSourceNamVal = options.getStringValue(Constants.ClientConfiguration.DATASOURCE_NAME);
             datasourceName = dataSourceNamVal == null ? null : dataSourceNamVal.getValue();
-            BString requestGeneratedKeysVal = options.getStringValue(
-                    Constants.ClientConfiguration.REQUEST_GENERATED_KEYS);
-            requestGeneratedKeys = requestGeneratedKeysVal == null ?
-                    Constants.RequestGeneratedKeysValues.ALL : requestGeneratedKeysVal.getValue();
             if (properties != null) {
+                Utils.addSSLOptions(options.getMapValue(Constants.ClientConfiguration.SECURE_SOCKET), properties);
                 for (Object propKey : properties.getKeys()) {
                     if (propKey.toString().toLowerCase(Locale.ENGLISH).matches(Constants.CONNECT_TIMEOUT)) {
                         poolProperties = new Properties();

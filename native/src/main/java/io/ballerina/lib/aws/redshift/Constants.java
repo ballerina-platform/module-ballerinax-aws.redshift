@@ -39,8 +39,17 @@ public final class Constants {
         public static final BString CONNECTION_POOL_OPTIONS = StringUtils.fromString("connectionPool");
         public static final BString OPTIONS = StringUtils.fromString("options");
         public static final BString PROPERTIES = StringUtils.fromString("properties");
+        public static final BString SECURE_SOCKET = StringUtils.fromString("ssl");
     }
 
+    public static final class SSL {
+        public static final BString SSL_MODE = StringUtils.fromString("ssl");
+        public static final BString ROOT_CERT = StringUtils.fromString("rootcert");
+        public static final BString SSL_FACTORY_ARG = StringUtils.fromString("sslfactory");
+        public static final BString SSL_FACTORY_VALUE = StringUtils.fromString("com.amazon.redshift.ssl.NonValidatingFactory");
+        public static final BString SSL_ROOT_CERT_ARG = StringUtils.fromString("sslfactoryarg");
+
+    }
     public static final String CONNECT_TIMEOUT = ".*(connect).*(timeout).*";
     public static final String POOL_CONNECTION_TIMEOUT = "ConnectionTimeout";
 
