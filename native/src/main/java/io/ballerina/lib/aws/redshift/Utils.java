@@ -31,10 +31,10 @@ public class Utils {
             options.put(Constants.SSL.SSL_MODE, false);
         } else {
             options.put(Constants.SSL.SSL_MODE, true);
-            BString sslrootcert = secureSocket.getStringValue(Constants.SSL.ROOT_CERT);
+            BString sslRootCert = secureSocket.getStringValue(Constants.SSL.ROOT_CERT);
             options.put(Constants.SSL.SSL_FACTORY_ARG, Constants.SSL.SSL_FACTORY_VALUE.getValue());
-            if (sslrootcert != null) {
-                options.put(Constants.SSL.SSL_ROOT_CERT_ARG, sslrootcert);
+            if (sslRootCert != null) {
+                options.put(Constants.SSL.SSL_ROOT_CERT_ARG, sslRootCert);
             }
         }
     }
