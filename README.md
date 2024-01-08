@@ -21,23 +21,34 @@ To effectively utilize the Ballerina AWS Redshift connector, you must have an Am
 
 ### Step 2: Navigate to Amazon Redshift and Create a Cluster
 1. In the AWS Console, navigate to the Amazon Redshift service. Click on the "Create cluster" button to initiate the process of creating a new Amazon Redshift cluster.
-    <img src=docs/setup/resources/create-cluster-1.png alt="Create cluster" width="50%">
-    <img src=docs/setup/resources/create-cluster-2.png alt="Create cluster" width="50%">
+
+    <img src=https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-aws.redshift/master/docs/setup/resources/create-cluster-1.png alt="Create cluster" width="50%">
+   
+    <img src=https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-aws.redshift/master/docs/setup/resources/create-cluster-2.png alt="Create cluster" width="50%">
 
 ### Step 3: Configure Cluster Settings
 1. Follow the on-screen instructions to configure your Redshift cluster settings, including cluster identifier, database name, credentials, and other relevant parameters.
-   <img src=docs/setup/resources/create-cluster-3.png alt="Create cluster" width="50%">
+
+   <img src=https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-aws.redshift/master/docs/setup/resources/create-cluster-3.png alt="Create cluster" width="50%">
+   
 2. Configure security groups to control inbound and outbound traffic to your Redshift cluster. Ensure that your Ballerina application will have the necessary permissions to access the cluster.
-   <img src=docs/setup/resources/create-cluster-5.png alt="Create cluster" width="50%">
+
+   <img src=https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-aws.redshift/master/docs/setup/resources/create-cluster-5.png alt="Create cluster" width="50%">
+   
 3. Record the username and password you set during the cluster configuration. These credentials will be used to authenticate your Ballerina application with the Redshift cluster.
-   <img src=docs/setup/resources/create-cluster-4.png alt="Create cluster" width="50%">
+
+   <img src=https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-aws.redshift/master/docs/setup/resources/create-cluster-4.png alt="Create cluster" width="50%">
+   
 4. Finally, review your configuration settings, and once satisfied, click "Create cluster" to launch your Amazon Redshift cluster.
 
 ### Step 4: Wait for Cluster Availability
 1. It may take some time for your Redshift cluster to be available. Monitor the cluster status in the AWS Console until it shows as "Available".
-   <img src=docs/setup/resources/create-cluster-7.png alt="Create cluster" width="50%">
+
+   <img src=https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-aws.redshift/master/docs/setup/resources/create-cluster-7.png alt="Create cluster" width="50%">
+   
 2. After the cluster is successfully created, copy the JDBC URL. You can find this information in the cluster details or configuration section of the AWS Console.
-   <img src=docs/setup/resources/create-cluster-8.png alt="Create cluster" width="50%">
+
+   <img src=https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-aws.redshift/master/docs/setup/resources/create-cluster-8.png alt="Create cluster" width="50%">
 
 ## Quickstart
 
