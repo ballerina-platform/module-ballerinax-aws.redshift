@@ -1,11 +1,11 @@
 Ballerina AWS Redshift Connector
 ===================
 
-[![Build](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/workflows/CI/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/actions?query=workflow%3ACI)
+[![Build](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/actions/workflows/ci.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/actions/workflows/ci.yml)
 [![Trivy](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/actions/workflows/trivy-scan.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/actions/workflows/trivy-scan.yml)
 [![codecov](https://codecov.io/gh/ballerina-platform/module-ballerinax-aws.redshift/branch/main/graph/badge.svg)](https://codecov.io/gh/ballerina-platform/module-ballerinax-aws.redshift)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/ballerina-platform/module-ballerinax-aws.redshift.svg)](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/commits/main)
-[![GraalVM Check](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/actions/workflows/build-with-bal-test-native.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/actions/workflows/build-with-bal-test-native.yml)
+[![GraalVM Check](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/actions/workflows/build-with-bal-test-graalvm.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/actions/workflows/build-with-bal-test-graalvm.yml)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 [Amazon Redshift](https://aws.amazon.com/redshift/) is a powerful and fully-managed data warehouse service provided by Amazon Web Services (AWS), designed to efficiently analyze large datasets with high performance and scalability.
