@@ -28,7 +28,7 @@ configurable string password = ?;
 redshift:Client dbClient = check new (jdbcUrl, user, password);
 
 public function main() returns error? {
-    sql:ParameterizedQuery sqlQuery = `SELECT * FROM Users limit 10`;
+    sql:ParameterizedQuery sqlQuery = `SELECT * FROM your_table_name limit 10`;
     stream<record {}, error?> resultStream = dbClient->query(sqlQuery);
     check from record {} result in resultStream
         do {
