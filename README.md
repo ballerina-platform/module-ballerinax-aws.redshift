@@ -10,7 +10,7 @@ Ballerina AWS Redshift Connector
 
 [Amazon Redshift](https://aws.amazon.com/redshift/) is a powerful and fully-managed data warehouse service provided by Amazon Web Services (AWS), designed to efficiently analyze large datasets with high performance and scalability.
 
-The `ballerinax/aws.redshift` connector facilitates seamless integration with Amazon Redshift, offering Ballerina users a convenient and expressive way to connect, query, and interact with Redshift clusters. 
+The `ballerinax/aws.redshift` connector facilitates seamless integration with Amazon Redshift, offering Ballerina users a convenient and expressive way to connect, query, and interact with Redshift clusters, utilizing the AWS Redshift JDBC driver available through [`ballerinax/aws.redshift.driver`](https://central.ballerina.io/ballerinax/aws.redshift.driver/latest).
 
 ## Set up guide
 
