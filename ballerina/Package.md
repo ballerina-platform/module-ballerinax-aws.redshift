@@ -4,12 +4,6 @@
 
 The `ballerinax/aws.redshift` connector facilitates seamless integration with Amazon Redshift, offering Ballerina users a convenient and expressive way to connect, query, and interact with Redshift clusters.
 
-## Compatibility
-|                               | Version                              |
-|-------------------------------|--------------------------------------|
-| Ballerina Language            | Ballerina Swan Lake 2201.8.0         |
-| Ballerina AWS Redshift Driver | ballerinax/aws.redshift.driver:0.1.0 |
-
 ## Set up guide
 
 To effectively utilize the Ballerina AWS Redshift connector, you must have an Amazon Redshift cluster. Follow these steps to create an AWS Redshift cluster.

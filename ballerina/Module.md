@@ -8,9 +8,11 @@ The `ballerinax/aws.redshift` connector facilitates seamless integration with Am
 To effectively utilize the Ballerina AWS Redshift connector, you must have an Amazon Redshift cluster. Follow these steps to create an AWS Redshift cluster.
 
 ### Step 1: Login to AWS Console
+
 1. Begin by logging into the [AWS Management Console](https://aws.amazon.com/).
 
 ### Step 2: Navigate to Amazon Redshift and Create a Cluster
+
 1. In the AWS Console, navigate to the Amazon Redshift service. Click on the "Create cluster" button to initiate the process of creating a new Amazon Redshift cluster.
 
     <img src=https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-aws.redshift/master/docs/setup/resources/create-cluster-1.png alt="Create cluster" width="50%">
@@ -18,6 +20,7 @@ To effectively utilize the Ballerina AWS Redshift connector, you must have an Am
     <img src=https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-aws.redshift/master/docs/setup/resources/create-cluster-2.png alt="Create cluster" width="50%">
 
 ### Step 3: Configure Cluster Settings
+
 1. Follow the on-screen instructions to configure your Redshift cluster settings, including cluster identifier, database name, credentials, and other relevant parameters.
 
    <img src=https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-aws.redshift/master/docs/setup/resources/basic-configs.png alt="Basic configs" width="50%">
@@ -33,6 +36,7 @@ To effectively utilize the Ballerina AWS Redshift connector, you must have an Am
 4. Finally, review your configuration settings, and once satisfied, click "Create cluster" to launch your Amazon Redshift cluster.
 
 ### Step 4: Wait for Cluster Availability
+
 1. It may take some time for your Redshift cluster to be available. Monitor the cluster status in the AWS Console until it shows as "Available".
 
    <img src=https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-aws.redshift/master/docs/setup/resources/availability.png alt="Availability" width="50%">
@@ -84,6 +88,7 @@ check from record {} result in resultStream
 ```
 
 #### Insert data into the database
+
 ```ballerina
 sql:ParameterizedQuery sqlQuery = `INSERT INTO your_table_name (firstname, lastname, state, email, username)
    VALUES ('Cody', 'Moss', 'ON', 'dolor.nonummy@ipsumdolorsit.ca', 'WWZ18EOX');`;

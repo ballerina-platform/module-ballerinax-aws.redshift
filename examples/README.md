@@ -2,9 +2,9 @@
 
 The `ballerinax/aws.redshift` connector facilitates seamless integration with Amazon Redshift, offering Ballerina users a convenient and expressive way to connect, query, and interact with Redshift clusters.
 
-1. [Read data from the database](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/blob/main/examples/query.bal) - Connects to AWS Redshift using the Redshift connector and performs a simple SQL query to select all records from a specified table with a limit of 10.
+1. [Read data from the database](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/blob/main/examples/query) - Connects to AWS Redshift using the Redshift connector and performs a simple SQL query to select all records from a specified table with a limit of 10.
 
-2. [Insert data in to the database](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/blob/main/examples/execute.bal) - Connects to AWS Redshift using the Redshift connector and performs an INSERT operation into a specified table
+2. [Insert data in to the database](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/blob/main/examples/execute) - Connects to AWS Redshift using the Redshift connector and performs an INSERT operation into a specified table
 
 ## Prerequisites
 
