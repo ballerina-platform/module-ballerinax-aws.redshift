@@ -19,7 +19,6 @@
 package io.ballerina.lib.aws.redshift.nativeimpl;
 
 import io.ballerina.lib.aws.redshift.Constants;
-import io.ballerina.lib.aws.redshift.Utils;
 import io.ballerina.runtime.api.creators.ValueCreator;
 import io.ballerina.runtime.api.values.BMap;
 import io.ballerina.runtime.api.values.BObject;
@@ -59,7 +58,7 @@ public class ClientProcessor {
             BString dataSourceNamVal = options.getStringValue(Constants.ClientConfiguration.DATASOURCE_NAME);
             datasourceName = dataSourceNamVal == null ? null : dataSourceNamVal.getValue();
             if (properties != null) {
-                Utils.addSSLOptions(options.getMapValue(Constants.ClientConfiguration.SECURE_SOCKET), properties);
+                addSSLOptions(options.getMapValue(Constants.ClientConfiguration.SECURE_SOCKET), properties);
                 for (Object propKey : properties.getKeys()) {
                     if (propKey.toString().toLowerCase(Locale.ENGLISH).matches(Constants.CONNECT_TIMEOUT)) {
                         poolProperties = new Properties();
@@ -109,5 +108,42 @@ public class ClientProcessor {
 
     public static Object close(BObject client) {
         return io.ballerina.stdlib.sql.nativeimpl.ClientProcessor.close(client);
+    }
+
+    private static void addSSLOptions(BMap secureSocket, BMap<BString, Object> options) {
+        if (secureSocket == null) {
+            options.put(Constants.SSL.SSL_MODE, Constants.SSL.SSL_MODE_DISABLED);
+        } else {
+            BString mode = secureSocket.getStringValue(Constants.SSL.SSL_MODE);
+            options.put(Constants.SSL.SSL_MODE_PROP, mode);
+            if (mode != Constants.SSL.SSL_MODE_DISABLED) {
+                options.put(Constants.SSL.SSL, true);
+            }
+            BMap key = secureSocket.getMapValue(Constants.SSL.KEY);
+            if (key != null) {
+                if (key.containsKey(Constants.SSL.CryptoKeyStoreRecord.KEY_STORE_RECORD_PATH_FIELD)
+                        && key.
+                        containsKey(Constants.SSL.CryptoKeyStoreRecord.KEY_STORE_RECORD_PASSWORD_FIELD)) {
+                    options.put(Constants.SSL.SSL_KEY,
+                            key.getStringValue(
+                                    Constants.SSL.CryptoKeyStoreRecord.KEY_STORE_RECORD_PATH_FIELD));
+                    options.put(Constants.SSL.SSL_PASSWORD, key
+                            .getStringValue(Constants.SSL.CryptoKeyStoreRecord.KEY_STORE_RECORD_PASSWORD_FIELD));
+                } else {
+                    options.put(Constants.SSL.SSL_CERT, key
+                            .getStringValue(Constants.SSL.CertKeyRecord.CERT_FILE));
+                    options.put(Constants.SSL.SSL_KEY, key
+                            .getStringValue(Constants.SSL.CertKeyRecord.KEY_FILE));
+                    BString keyPassword = key.getStringValue(Constants.SSL.CertKeyRecord.KEY_PASSWORD);
+                    if (keyPassword != null) {
+                        options.put(Constants.SSL.SSL_PASSWORD, keyPassword);
+                    }
+                }
+            }
+            BString sslrootcert = secureSocket.getStringValue(Constants.SSL.ROOT_CERT);
+            if (sslrootcert != null) {
+                options.put(Constants.SSL.SSL_ROOT_CERT, sslrootcert);
+            }
+        }
     }
 }

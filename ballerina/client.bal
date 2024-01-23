@@ -14,6 +14,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
+import ballerina/crypto;
 import ballerina/jballerina.java;
 import ballerina/sql;
 
@@ -124,10 +125,35 @@ public type Options record {|
 
 # The SSL configurations to be used when connecting to the Redshift server.
 #
-# + rootcert - File path of the SSL root certificate
+# + mode - The `SSLMode` to be used during the connection
+# + key - Keystore configuration of the client certificates
+# + rootCert - File path of the SSL root certificate
 public type SecureSocket record {|
-    string rootcert?;
+    SSLMode mode = PREFER;
+    string rootCert?;
+    crypto:KeyStore|CertKey key?;
 |};
+
+# Represents the combination of the certificate, the private key, and the private key password if encrypted
+#
+# + certFile - A file containing the client certificate
+# + keyFile - A file containing the client private key
+# + keyPassword - Password of the private key if it is encrypted
+public type CertKey record {|
+    string certFile;
+    string keyFile;
+    string keyPassword?;
+|};
+
+# Possible values for the SSL mode.
+public enum SSLMode {
+    PREFER,
+    REQUIRE,
+    DISABLE,
+    ALLOW,
+    VERIFY_CA = "verify-ca",
+    VERIFY_FULL = "verify-full"
+}
 
 # An additional set of configurations for the JDBC Client to be passed internally within the module.
 #

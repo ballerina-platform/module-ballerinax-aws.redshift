@@ -43,13 +43,32 @@ public final class Constants {
     }
 
     public static final class SSL {
-        public static final BString SSL_MODE = StringUtils.fromString("ssl");
-        public static final BString ROOT_CERT = StringUtils.fromString("rootcert");
-        public static final BString SSL_FACTORY_ARG = StringUtils.fromString("sslfactory");
-        public static final BString SSL_FACTORY_VALUE =
-                StringUtils.fromString("com.amazon.redshift.ssl.NonValidatingFactory");
-        public static final BString SSL_ROOT_CERT_ARG = StringUtils.fromString("sslfactoryarg");
-
+        public static final BString SSL = StringUtils.fromString("ssl");
+        public static final BString KEY = StringUtils.fromString("key");
+        public static final BString SSL_MODE = StringUtils.fromString("mode");
+        public static final BString SSL_MODE_DISABLED = StringUtils.fromString("disable");
+        public static final BString SSL_KEY = StringUtils.fromString("sslkey");
+        public static final BString SSL_PASSWORD = StringUtils.fromString("sslpassword");
+        public static final BString SSL_ROOT_CERT = StringUtils.fromString("sslrootcert");
+        public static final BString SSL_CERT = StringUtils.fromString("sslcert");
+        public static final BString ROOT_CERT = StringUtils.fromString("rootCert");
+        /**
+        /**
+         The following constants are used to process ballerina `crypto:KeyStore` record.
+         */
+        public static final class CryptoKeyStoreRecord {
+            public static final BString KEY_STORE_RECORD_PATH_FIELD = StringUtils.fromString("path");
+            public static final BString KEY_STORE_RECORD_PASSWORD_FIELD = StringUtils.fromString("password");
+        }
+        /**
+         The following constants are used to process `redshift:CertKey` record.
+         */
+        public static final class CertKeyRecord {
+            public static final BString CERT_FILE = StringUtils.fromString("certFile");
+            public static final BString KEY_FILE = StringUtils.fromString("keyFile");
+            public static final BString KEY_PASSWORD = StringUtils.fromString("keyPassword");
+        }
+        public static final BString SSL_MODE_PROP = StringUtils.fromString("sslmode");
     }
     public static final String CONNECT_TIMEOUT = ".*(connect).*(timeout).*";
     public static final String POOL_CONNECTION_TIMEOUT = "ConnectionTimeout";
