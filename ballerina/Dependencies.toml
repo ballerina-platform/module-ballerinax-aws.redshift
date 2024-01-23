@@ -9,6 +9,18 @@ distribution-version = "2201.8.0"
 
 [[package]]
 org = "ballerina"
+name = "crypto"
+version = "2.6.2"
+dependencies = [
+	{org = "ballerina", name = "jballerina.java"},
+	{org = "ballerina", name = "time"}
+]
+modules = [
+	{org = "ballerina", packageName = "crypto", moduleName = "crypto"}
+]
+
+[[package]]
+org = "ballerina"
 name = "io"
 version = "1.6.0"
 dependencies = [
@@ -62,8 +74,9 @@ dependencies = [
 [[package]]
 org = "ballerinax"
 name = "aws.redshift"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
+	{org = "ballerina", name = "crypto"},
 	{org = "ballerina", name = "jballerina.java"},
 	{org = "ballerina", name = "sql"}
 ]
