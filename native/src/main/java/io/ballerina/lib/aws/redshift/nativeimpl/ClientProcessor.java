@@ -54,19 +54,21 @@ public class ClientProcessor {
         Properties poolProperties = null;
 
         if (options != null) {
-            properties = options.getMapValue(Constants.ClientConfiguration.PROPERTIES);
-            BString dataSourceNamVal = options.getStringValue(Constants.ClientConfiguration.DATASOURCE_NAME);
-            datasourceName = dataSourceNamVal == null ? null : dataSourceNamVal.getValue();
-            if (properties != null) {
-                addSSLOptions(options.getMapValue(Constants.ClientConfiguration.SECURE_SOCKET), properties);
-                for (Object propKey : properties.getKeys()) {
-                    if (propKey.toString().toLowerCase(Locale.ENGLISH).matches(Constants.CONNECT_TIMEOUT)) {
-                        poolProperties = new Properties();
-                        poolProperties.setProperty(Constants.POOL_CONNECTION_TIMEOUT,
-                                properties.getStringValue((BString) propKey).getValue());
+            if (options.getMapValue(Constants.ClientConfiguration.PROPERTIES) != null) {
+                properties = options.getMapValue(Constants.ClientConfiguration.PROPERTIES);
+                BString dataSourceNamVal = options.getStringValue(Constants.ClientConfiguration.DATASOURCE_NAME);
+                datasourceName = dataSourceNamVal == null ? null : dataSourceNamVal.getValue();
+                if (properties != null) {
+                    for (Object propKey : properties.getKeys()) {
+                        if (propKey.toString().toLowerCase(Locale.ENGLISH).matches(Constants.CONNECT_TIMEOUT)) {
+                            poolProperties = new Properties();
+                            poolProperties.setProperty(Constants.POOL_CONNECTION_TIMEOUT,
+                                    properties.getStringValue((BString) propKey).getValue());
+                        }
                     }
                 }
             }
+            addSSLOptions(options, properties);
         }
 
         BMap connectionPool = clientConfig.getMapValue(Constants.ClientConfiguration.CONNECTION_POOL_OPTIONS);
@@ -110,40 +112,13 @@ public class ClientProcessor {
         return io.ballerina.stdlib.sql.nativeimpl.ClientProcessor.close(client);
     }
 
-    private static void addSSLOptions(BMap secureSocket, BMap<BString, Object> options) {
-        if (secureSocket == null) {
-            options.put(Constants.SSL.SSL_MODE, Constants.SSL.SSL_MODE_DISABLED);
+    private static void addSSLOptions(BMap config, BMap<BString, Object> options) {
+        BString mode = config.getStringValue(Constants.SSL.SSL_MODE);
+        options.put(Constants.SSL.SSL_MODE_PROP, mode);
+        if (mode != Constants.SSL.SSL_MODE_DISABLED) {
+            options.put(Constants.SSL.SSL, true);
         } else {
-            BString mode = secureSocket.getStringValue(Constants.SSL.SSL_MODE);
-            options.put(Constants.SSL.SSL_MODE_PROP, mode);
-            if (mode != Constants.SSL.SSL_MODE_DISABLED) {
-                options.put(Constants.SSL.SSL, true);
-            }
-            BMap key = secureSocket.getMapValue(Constants.SSL.KEY);
-            if (key != null) {
-                if (key.containsKey(Constants.SSL.CryptoKeyStoreRecord.KEY_STORE_RECORD_PATH_FIELD)
-                        && key.
-                        containsKey(Constants.SSL.CryptoKeyStoreRecord.KEY_STORE_RECORD_PASSWORD_FIELD)) {
-                    options.put(Constants.SSL.SSL_KEY,
-                            key.getStringValue(
-                                    Constants.SSL.CryptoKeyStoreRecord.KEY_STORE_RECORD_PATH_FIELD));
-                    options.put(Constants.SSL.SSL_PASSWORD, key
-                            .getStringValue(Constants.SSL.CryptoKeyStoreRecord.KEY_STORE_RECORD_PASSWORD_FIELD));
-                } else {
-                    options.put(Constants.SSL.SSL_CERT, key
-                            .getStringValue(Constants.SSL.CertKeyRecord.CERT_FILE));
-                    options.put(Constants.SSL.SSL_KEY, key
-                            .getStringValue(Constants.SSL.CertKeyRecord.KEY_FILE));
-                    BString keyPassword = key.getStringValue(Constants.SSL.CertKeyRecord.KEY_PASSWORD);
-                    if (keyPassword != null) {
-                        options.put(Constants.SSL.SSL_PASSWORD, keyPassword);
-                    }
-                }
-            }
-            BString sslrootcert = secureSocket.getStringValue(Constants.SSL.ROOT_CERT);
-            if (sslrootcert != null) {
-                options.put(Constants.SSL.SSL_ROOT_CERT, sslrootcert);
-            }
+            options.put(Constants.SSL.SSL, false);
         }
     }
 }

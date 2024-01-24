@@ -116,41 +116,19 @@ public isolated client class Client {
 #
 # + datasourceName - The driver class name to be used to get the connection
 # + properties - The database properties, which should be applied when getting the connection
-# + ssl - SSL configurations to be used
+# + mode - Value for the SSL mode
 public type Options record {|
     string? datasourceName = ();
     map<anydata>? properties = ();
-    SecureSocket ssl?;
-|};
-
-# The SSL configurations to be used when connecting to the Redshift server.
-#
-# + mode - The `SSLMode` to be used during the connection
-# + key - Keystore configuration of the client certificates
-# + rootCert - File path of the SSL root certificate
-public type SecureSocket record {|
-    SSLMode mode = PREFER;
-    string rootCert?;
-    crypto:KeyStore|CertKey key?;
-|};
-
-# Represents the combination of the certificate, the private key, and the private key password if encrypted
-#
-# + certFile - A file containing the client certificate
-# + keyFile - A file containing the client private key
-# + keyPassword - Password of the private key if it is encrypted
-public type CertKey record {|
-    string certFile;
-    string keyFile;
-    string keyPassword?;
+    SSLMode sslMode = ALLOW;
 |};
 
 # Possible values for the SSL mode.
 public enum SSLMode {
-    PREFER,
-    REQUIRE,
-    DISABLE,
-    ALLOW,
+    PREFER = "prefer",
+    REQUIRE = "require",
+    DISABLE = "disable",
+    ALLOW = "allow",
     VERIFY_CA = "verify-ca",
     VERIFY_FULL = "verify-full"
 }

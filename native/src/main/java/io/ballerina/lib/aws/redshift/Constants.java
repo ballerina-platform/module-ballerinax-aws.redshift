@@ -35,39 +35,15 @@ public final class Constants {
         public static final BString USER = StringUtils.fromString("user");
         public static final BString PASSWORD = StringUtils.fromString("password");
         public static final BString DATASOURCE_NAME = StringUtils.fromString("datasourceName");
-        public static final BString REQUEST_GENERATED_KEYS = StringUtils.fromString("requestGeneratedKeys");
         public static final BString CONNECTION_POOL_OPTIONS = StringUtils.fromString("connectionPool");
         public static final BString OPTIONS = StringUtils.fromString("options");
         public static final BString PROPERTIES = StringUtils.fromString("properties");
-        public static final BString SECURE_SOCKET = StringUtils.fromString("ssl");
     }
 
     public static final class SSL {
         public static final BString SSL = StringUtils.fromString("ssl");
-        public static final BString KEY = StringUtils.fromString("key");
-        public static final BString SSL_MODE = StringUtils.fromString("mode");
+        public static final BString SSL_MODE = StringUtils.fromString("sslMode");
         public static final BString SSL_MODE_DISABLED = StringUtils.fromString("disable");
-        public static final BString SSL_KEY = StringUtils.fromString("sslkey");
-        public static final BString SSL_PASSWORD = StringUtils.fromString("sslpassword");
-        public static final BString SSL_ROOT_CERT = StringUtils.fromString("sslrootcert");
-        public static final BString SSL_CERT = StringUtils.fromString("sslcert");
-        public static final BString ROOT_CERT = StringUtils.fromString("rootCert");
-        /**
-        /**
-         The following constants are used to process ballerina `crypto:KeyStore` record.
-         */
-        public static final class CryptoKeyStoreRecord {
-            public static final BString KEY_STORE_RECORD_PATH_FIELD = StringUtils.fromString("path");
-            public static final BString KEY_STORE_RECORD_PASSWORD_FIELD = StringUtils.fromString("password");
-        }
-        /**
-         The following constants are used to process `redshift:CertKey` record.
-         */
-        public static final class CertKeyRecord {
-            public static final BString CERT_FILE = StringUtils.fromString("certFile");
-            public static final BString KEY_FILE = StringUtils.fromString("keyFile");
-            public static final BString KEY_PASSWORD = StringUtils.fromString("keyPassword");
-        }
         public static final BString SSL_MODE_PROP = StringUtils.fromString("sslmode");
     }
     public static final String CONNECT_TIMEOUT = ".*(connect).*(timeout).*";
