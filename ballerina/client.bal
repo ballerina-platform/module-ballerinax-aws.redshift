@@ -119,15 +119,11 @@ public isolated client class Client {
 public type Options record {|
     string? datasourceName = ();
     map<anydata>? properties = ();
-    SSLMode sslMode = ALLOW;
+    SSLMode sslMode = VERIFY_CA;
 |};
 
 # Possible values for the SSL mode.
 public enum SSLMode {
-    PREFER = "prefer",
-    REQUIRE = "require",
-    DISABLE = "disable",
-    ALLOW = "allow",
     VERIFY_CA = "verify-ca",
     VERIFY_FULL = "verify-full"
 }

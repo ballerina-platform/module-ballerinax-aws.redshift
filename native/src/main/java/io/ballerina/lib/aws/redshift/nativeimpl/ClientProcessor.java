@@ -82,28 +82,11 @@ public class ClientProcessor {
                 .setPoolProperties(poolProperties)
                 .setConnectionPool(connectionPool, globalPool);
 
-        boolean executeGKFlag = false;
-        boolean batchExecuteGKFlag = false;
-        switch (requestGeneratedKeys) {
-            case Constants.RequestGeneratedKeysValues.EXECUTE:
-                executeGKFlag = true;
-                break;
-            case Constants.RequestGeneratedKeysValues.BATCH_EXECUTE:
-                batchExecuteGKFlag = true;
-                break;
-            case Constants.RequestGeneratedKeysValues.ALL:
-                executeGKFlag = true;
-                batchExecuteGKFlag = true;
-                break;
-            default:
-                break;
-        }
 
         return io.ballerina.stdlib.sql.nativeimpl.ClientProcessor.createClient(client, sqlDatasourceParams,
-                executeGKFlag, batchExecuteGKFlag);
+                true, true);
     }
 
-    // Unable to perform a complete validation since URL differs based on the database.
     private static boolean isJdbcUrlValid(String jdbcUrl) {
         return !jdbcUrl.isEmpty() && jdbcUrl.trim().startsWith("jdbc:");
     }
@@ -115,10 +98,5 @@ public class ClientProcessor {
     private static void addSSLOptions(BMap config, BMap<BString, Object> options) {
         BString mode = config.getStringValue(Constants.SSL.SSL_MODE);
         options.put(Constants.SSL.SSL_MODE_PROP, mode);
-        if (mode != Constants.SSL.SSL_MODE_DISABLED) {
-            options.put(Constants.SSL.SSL, true);
-        } else {
-            options.put(Constants.SSL.SSL, false);
-        }
     }
 }
