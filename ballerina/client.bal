@@ -115,18 +115,18 @@ public isolated client class Client {
 #
 # + datasourceName - The driver class name to be used to get the connection
 # + properties - The database properties, which should be applied when getting the connection
-# + mode - Value for the SSL mode
+# + sslMode - Value for the SSL mode
 public type Options record {|
     string? datasourceName = ();
     map<anydata>? properties = ();
-    SSLMode sslMode = DISABLE;
+    SslMode sslMode = DISABLE;
 |};
 
 # Possible values for the SSL mode.
-public enum SSLMode {
-    DISABLE = "disable",
-    VERIFY_CA = "verify-ca",
-    VERIFY_FULL = "verify-full"
+public enum SslMode {
+    DISABLE,
+    VERIFY_CA,
+    VERIFY_FULL
 }
 
 # An additional set of configurations for the JDBC Client to be passed internally within the module.

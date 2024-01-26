@@ -43,7 +43,10 @@ public final class Constants {
     public static final class SSL {
         public static final BString SSL = StringUtils.fromString("ssl");
         public static final BString SSL_MODE = StringUtils.fromString("sslMode");
-        public static final BString SSL_MODE_DISABLED = StringUtils.fromString("disable");
+        public static final BString SSL_MODE_DISABLED = StringUtils.fromString("DISABLE");
+        public static final BString SSL_MODE_VERIFY_CA = StringUtils.fromString("VERIFY_CA");
+        public static final BString SSL_MODE_VERIFY_CA_ARG = StringUtils.fromString("verify-ca");
+        public static final BString SSL_MODE_VERIFY_FULL_ARG = StringUtils.fromString("verify-full");
         public static final BString SSL_MODE_PROP = StringUtils.fromString("sslmode");
     }
     public static final String CONNECT_TIMEOUT = ".*(connect).*(timeout).*";

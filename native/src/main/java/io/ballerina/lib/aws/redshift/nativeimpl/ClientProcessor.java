@@ -57,17 +57,15 @@ public class ClientProcessor {
                 properties = options.getMapValue(Constants.ClientConfiguration.PROPERTIES);
                 BString dataSourceNamVal = options.getStringValue(Constants.ClientConfiguration.DATASOURCE_NAME);
                 datasourceName = dataSourceNamVal == null ? null : dataSourceNamVal.getValue();
-                if (properties != null) {
-                    for (Object propKey : properties.getKeys()) {
-                        if (propKey.toString().toLowerCase(Locale.ENGLISH).matches(Constants.CONNECT_TIMEOUT)) {
-                            poolProperties = new Properties();
-                            poolProperties.setProperty(Constants.POOL_CONNECTION_TIMEOUT,
-                                    properties.getStringValue((BString) propKey).getValue());
-                        }
+                for (Object propKey : properties.getKeys()) {
+                    if (propKey.toString().toLowerCase(Locale.ENGLISH).matches(Constants.CONNECT_TIMEOUT)) {
+                        poolProperties = new Properties();
+                        poolProperties.setProperty(Constants.POOL_CONNECTION_TIMEOUT,
+                                properties.getStringValue((BString) propKey).getValue());
                     }
                 }
             }
-            addSSLOptions(options, properties);
+            addSslOptions(options, properties);
         }
 
         BMap connectionPool = clientConfig.getMapValue(Constants.ClientConfiguration.CONNECTION_POOL_OPTIONS);
@@ -94,13 +92,17 @@ public class ClientProcessor {
         return io.ballerina.stdlib.sql.nativeimpl.ClientProcessor.close(client);
     }
 
-    private static void addSSLOptions(BMap config, BMap<BString, Object> options) {
+    private static void addSslOptions(BMap config, BMap<BString, Object> options) {
         BString mode = config.getStringValue(Constants.SSL.SSL_MODE);
-        if (mode.getValue().equals(Constants.SSL.SSL_MODE_DISABLED.getValue())) {
+        if (mode.equals(Constants.SSL.SSL_MODE_DISABLED)) {
             options.put(Constants.SSL.SSL, false);
         } else {
-            options.put(Constants.SSL.SSL_MODE_PROP, mode);
             options.put(Constants.SSL.SSL, true);
+            if (mode.getValue().equals(Constants.SSL.SSL_MODE_VERIFY_CA.getValue())) {
+                options.put(Constants.SSL.SSL_MODE_PROP, Constants.SSL.SSL_MODE_VERIFY_CA_ARG);
+            } else {
+                options.put(Constants.SSL.SSL_MODE_PROP, Constants.SSL.SSL_MODE_VERIFY_FULL_ARG);
+            }
         }
     }
 }
