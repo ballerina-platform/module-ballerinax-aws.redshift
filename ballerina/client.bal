@@ -124,8 +124,11 @@ public type Options record {|
 
 # Possible values for the SSL mode.
 public enum SslMode {
+    # SSL is disabled and the connection is not encrypted
     DISABLE,
+    # SSL is enabled and the server certificate must be verified
     VERIFY_CA,
+    # SSL is enabled. The server certificate must be verified and the server hostname must match the hostname attribute on the certificate
     VERIFY_FULL
 }
 
