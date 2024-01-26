@@ -47,7 +47,6 @@ public class ClientProcessor {
         BString passwordVal = clientConfig.getStringValue(Constants.ClientConfiguration.PASSWORD);
         String password = passwordVal == null ? null : passwordVal.getValue();
         String datasourceName = null;
-        String requestGeneratedKeys = Constants.RequestGeneratedKeysValues.ALL;
 
         BMap options = clientConfig.getMapValue(Constants.ClientConfiguration.OPTIONS);
         BMap<BString, Object> properties = ValueCreator.createMapValue();
@@ -97,6 +96,11 @@ public class ClientProcessor {
 
     private static void addSSLOptions(BMap config, BMap<BString, Object> options) {
         BString mode = config.getStringValue(Constants.SSL.SSL_MODE);
-        options.put(Constants.SSL.SSL_MODE_PROP, mode);
+        if (mode.getValue().equals(Constants.SSL.SSL_MODE_DISABLED.getValue())) {
+            options.put(Constants.SSL.SSL, false);
+        } else {
+            options.put(Constants.SSL.SSL_MODE_PROP, mode);
+            options.put(Constants.SSL.SSL, true);
+        }
     }
 }

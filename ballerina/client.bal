@@ -124,6 +124,7 @@ public type Options record {|
 
 # Possible values for the SSL mode.
 public enum SSLMode {
+    DISABLE = "disable",
     VERIFY_CA = "verify-ca",
     VERIFY_FULL = "verify-full"
 }
