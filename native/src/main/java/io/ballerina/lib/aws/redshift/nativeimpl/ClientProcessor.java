@@ -47,21 +47,16 @@ public class ClientProcessor {
         BString passwordVal = clientConfig.getStringValue(Constants.ClientConfiguration.PASSWORD);
         String password = passwordVal == null ? null : passwordVal.getValue();
         String datasourceName = null;
-        String requestGeneratedKeys = Constants.RequestGeneratedKeysValues.ALL;
 
         BMap options = clientConfig.getMapValue(Constants.ClientConfiguration.OPTIONS);
         BMap<BString, Object> properties = ValueCreator.createMapValue();
         Properties poolProperties = null;
 
         if (options != null) {
-            properties = options.getMapValue(Constants.ClientConfiguration.PROPERTIES);
-            BString dataSourceNamVal = options.getStringValue(Constants.ClientConfiguration.DATASOURCE_NAME);
-            datasourceName = dataSourceNamVal == null ? null : dataSourceNamVal.getValue();
-            BString requestGeneratedKeysVal = options.getStringValue(
-                    Constants.ClientConfiguration.REQUEST_GENERATED_KEYS);
-            requestGeneratedKeys = requestGeneratedKeysVal == null ?
-                    Constants.RequestGeneratedKeysValues.ALL : requestGeneratedKeysVal.getValue();
-            if (properties != null) {
+            if (options.getMapValue(Constants.ClientConfiguration.PROPERTIES) != null) {
+                properties = options.getMapValue(Constants.ClientConfiguration.PROPERTIES);
+                BString dataSourceNamVal = options.getStringValue(Constants.ClientConfiguration.DATASOURCE_NAME);
+                datasourceName = dataSourceNamVal == null ? null : dataSourceNamVal.getValue();
                 for (Object propKey : properties.getKeys()) {
                     if (propKey.toString().toLowerCase(Locale.ENGLISH).matches(Constants.CONNECT_TIMEOUT)) {
                         poolProperties = new Properties();
@@ -70,6 +65,7 @@ public class ClientProcessor {
                     }
                 }
             }
+            addSslOptions(options, properties);
         }
 
         BMap connectionPool = clientConfig.getMapValue(Constants.ClientConfiguration.CONNECTION_POOL_OPTIONS);
@@ -83,33 +79,30 @@ public class ClientProcessor {
                 .setPoolProperties(poolProperties)
                 .setConnectionPool(connectionPool, globalPool);
 
-        boolean executeGKFlag = false;
-        boolean batchExecuteGKFlag = false;
-        switch (requestGeneratedKeys) {
-            case Constants.RequestGeneratedKeysValues.EXECUTE:
-                executeGKFlag = true;
-                break;
-            case Constants.RequestGeneratedKeysValues.BATCH_EXECUTE:
-                batchExecuteGKFlag = true;
-                break;
-            case Constants.RequestGeneratedKeysValues.ALL:
-                executeGKFlag = true;
-                batchExecuteGKFlag = true;
-                break;
-            default:
-                break;
-        }
 
         return io.ballerina.stdlib.sql.nativeimpl.ClientProcessor.createClient(client, sqlDatasourceParams,
-                executeGKFlag, batchExecuteGKFlag);
+                true, true);
     }
 
-    // Unable to perform a complete validation since URL differs based on the database.
     private static boolean isJdbcUrlValid(String jdbcUrl) {
         return !jdbcUrl.isEmpty() && jdbcUrl.trim().startsWith("jdbc:");
     }
 
     public static Object close(BObject client) {
         return io.ballerina.stdlib.sql.nativeimpl.ClientProcessor.close(client);
+    }
+
+    private static void addSslOptions(BMap config, BMap<BString, Object> options) {
+        BString mode = config.getStringValue(Constants.SSL.SSL_MODE);
+        if (mode.equals(Constants.SSL.SSL_MODE_DISABLED)) {
+            options.put(Constants.SSL.SSL, false);
+        } else {
+            options.put(Constants.SSL.SSL, true);
+            if (mode.equals(Constants.SSL.SSL_MODE_VERIFY_CA)) {
+                options.put(Constants.SSL.SSL_MODE_PROP, Constants.SSL.SSL_MODE_VERIFY_CA_ARG);
+            } else {
+                options.put(Constants.SSL.SSL_MODE_PROP, Constants.SSL.SSL_MODE_VERIFY_FULL_ARG);
+            }
+        }
     }
 }

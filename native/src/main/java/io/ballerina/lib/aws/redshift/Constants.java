@@ -35,12 +35,20 @@ public final class Constants {
         public static final BString USER = StringUtils.fromString("user");
         public static final BString PASSWORD = StringUtils.fromString("password");
         public static final BString DATASOURCE_NAME = StringUtils.fromString("datasourceName");
-        public static final BString REQUEST_GENERATED_KEYS = StringUtils.fromString("requestGeneratedKeys");
         public static final BString CONNECTION_POOL_OPTIONS = StringUtils.fromString("connectionPool");
         public static final BString OPTIONS = StringUtils.fromString("options");
         public static final BString PROPERTIES = StringUtils.fromString("properties");
     }
 
+    public static final class SSL {
+        public static final BString SSL = StringUtils.fromString("ssl");
+        public static final BString SSL_MODE = StringUtils.fromString("sslMode");
+        public static final BString SSL_MODE_DISABLED = StringUtils.fromString("DISABLE");
+        public static final BString SSL_MODE_VERIFY_CA = StringUtils.fromString("VERIFY_CA");
+        public static final BString SSL_MODE_VERIFY_CA_ARG = StringUtils.fromString("verify-ca");
+        public static final BString SSL_MODE_VERIFY_FULL_ARG = StringUtils.fromString("verify-full");
+        public static final BString SSL_MODE_PROP = StringUtils.fromString("sslmode");
+    }
     public static final String CONNECT_TIMEOUT = ".*(connect).*(timeout).*";
     public static final String POOL_CONNECTION_TIMEOUT = "ConnectionTimeout";
 
