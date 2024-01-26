@@ -98,7 +98,7 @@ public class ClientProcessor {
             options.put(Constants.SSL.SSL, false);
         } else {
             options.put(Constants.SSL.SSL, true);
-            if (mode.getValue().equals(Constants.SSL.SSL_MODE_VERIFY_CA.getValue())) {
+            if (mode.equals(Constants.SSL.SSL_MODE_VERIFY_CA)) {
                 options.put(Constants.SSL.SSL_MODE_PROP, Constants.SSL.SSL_MODE_VERIFY_CA_ARG);
             } else {
                 options.put(Constants.SSL.SSL_MODE_PROP, Constants.SSL.SSL_MODE_VERIFY_FULL_ARG);
