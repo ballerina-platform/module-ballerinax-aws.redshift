@@ -24,9 +24,6 @@ configurable string jdbcUrl = ?;
 configurable string user = ?;
 configurable string password = ?;
 
-// Initialize the Redshift client
-redshift:Client dbClient = check new (jdbcUrl, user, password);
-
 type Album record {|
     string id;
     string title;
