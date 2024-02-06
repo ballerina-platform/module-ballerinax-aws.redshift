@@ -18,7 +18,7 @@ Configure AWS Redshift API credentials in `Config.toml` within the setup and mus
 
 ## Run the Example
 
-1. First, run the [`setup`](setup) ballerina program to set up the `MUSIC_STORE` database used in the sample. Execute the following command:
+1. First, run the [`setup`](../setup) ballerina program to set up the `MUSIC_STORE` database used in the sample. Execute the following command:
 ```bash
 cd setup
 bal run
