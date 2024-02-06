@@ -80,11 +80,18 @@ Now, utilize the available connector operations.
 #### Read data from the database
 
 ```ballerina
+// Create the result record to match the columns of the table being queried.
+type User record {|
+    string name;
+    string email;
+    string state;
+|};
+
 sql:ParameterizedQuery sqlQuery = `SELECT * FROM Users limit 10`;
-stream<record {}, error?> resultStream = dbClient->query(sqlQuery);
-check from record {} result in resultStream
+stream<User, error?> resultStream = dbClient->query(sqlQuery);
+check from User user in resultStream
    do {
-      io:println("Full details of users: ", result);
+      io:println("Full details of users: ", user);
    };
 ```
 
