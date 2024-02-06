@@ -79,11 +79,18 @@ Now, utilize the available connector operations.
 #### Read data from the database
 
 ```ballerina
+// Create the result record to match the columns of the table being queried.
+type User record {|
+    string name;
+    string email;
+    string state;
+|};
+
 sql:ParameterizedQuery sqlQuery = `SELECT * FROM Users limit 10`;
-stream<record {}, error?> resultStream = dbClient->query(sqlQuery);
-check from record {} result in resultStream
+stream<User, error?> resultStream = dbClient->query(sqlQuery);
+check from User user in resultStream
    do {
-      io:println("Full details of users: ", result);
+      io:println("Full details of users: ", user);
    };
 ```
 
@@ -98,3 +105,9 @@ _ = check dbClient->execute(sqlQuery);
 ## Examples
 
 The `aws.redshift` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/tree/master/examples).
+
+1. [Read data from the database](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/blob/main/examples/query) - Connects to AWS Redshift using the Redshift connector and performs a simple SQL query to select all records from a specified table with a limit of 10.
+
+2. [Insert data in to the database](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/blob/main/examples/execute) - Connects to AWS Redshift using the Redshift connector and performs an INSERT operation into a specified table
+
+3. [Music store](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/blob/main/examples/music-store) - This example illustrates the process of creating an HTTP RESTful API with Ballerina to perform basic CRUD operations on a database, specifically AWS Redshift, involving setup, configuration, and running examples.
