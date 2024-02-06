@@ -10,7 +10,7 @@ Refer to the set up guide in [ReadMe](../../../README.md) for necessary credenti
 
 ### 2. Configuration
 
-Configure AWS Redshift API credent        ials in Config.toml in the example directory:
+Configure AWS Redshift API credentials in Config.toml in the example directory:
 
 ```toml
     jdbcUrl="<JDBC URL of the created Redshift cluster>"
