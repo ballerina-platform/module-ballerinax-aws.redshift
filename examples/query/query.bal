@@ -27,11 +27,18 @@ configurable string password = ?;
 // Initialize the Redshift client
 redshift:Client dbClient = check new (jdbcUrl, user, password);
 
+// Create the result record to match the columns of the table being queried.
+type User record {|
+    string name;
+    string email;
+    string state;
+|};
+
 public function main() returns error? {
-    sql:ParameterizedQuery sqlQuery = `SELECT * FROM your_table_name limit 10`;
-    stream<record {}, error?> resultStream = dbClient->query(sqlQuery);
-    check from record {} result in resultStream
+    sql:ParameterizedQuery sqlQuery = `SELECT * FROM Users limit 10`;
+    stream<User, error?> resultStream = dbClient->query(sqlQuery);
+    check from User user in resultStream
         do {
-            io:println("Full details of users: ", result);
+            io:println("Full details of users: ", user);
         };
 }
