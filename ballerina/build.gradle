@@ -86,6 +86,55 @@ clean {
     delete 'build'
 }
 
+task startDatabaseServer() {
+    doLast {
+        if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
+            def stdOut = new ByteArrayOutputStream()
+            exec {
+                commandLine 'sh', '-c', "docker ps --filter name=server-redshift-1"
+                standardOutput = stdOut
+            }
+            if (!stdOut.toString().contains("server-redshift-1")) {
+                println "Starting Redshift server."
+                exec {
+                    commandLine 'sh', '-c', "docker-compose -f tests/server/docker-compose.yaml up -d"
+                    standardOutput = stdOut
+                }
+                println stdOut.toString()
+                sleep(10 * 1000)
+            } else {
+                println "Redshift server is already started."
+            }
+        }
+    }
+}
+
+task stopDatabaseServer() {
+    doLast {
+        if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
+            def stdOut = new ByteArrayOutputStream()
+            exec {
+                commandLine 'sh', '-c', "docker ps --filter name=server-redshift-1"
+                standardOutput = stdOut
+            }
+            if (stdOut.toString().contains("server-redshift-1")) {
+                println "Stopping RabbitMQ server."
+                exec {
+                    commandLine 'sh', '-c', "docker-compose -f tests/server/docker-compose.yaml rm -svf"
+                    standardOutput = stdOut
+                }
+                println stdOut.toString()
+                sleep(5 * 1000)
+            } else {
+                println "Redshift server is not started."
+            }
+        }
+    }
+}
+
 build.dependsOn copyToLib
 build.dependsOn ":${packageName}-native:build"
+test.dependsOn ":${packageName}-native:build"
+test.dependsOn startDatabaseServer
+build.finalizedBy stopDatabaseServer
 publish.dependsOn build
