@@ -17,3 +17,10 @@
 final string & readonly jdbcUrl = "jdbc:postgresql://localhost:5432/postgres?ssl=false";
 final string & readonly user = "postgres";
 final string & readonly password = "password";
+
+public type NumericProcedureRecord record {
+    int row_id;
+    int int_type;
+    int bigint_type;
+    float double_type;
+};

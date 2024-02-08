@@ -14,8 +14,8 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/test;
 import ballerina/log;
+import ballerina/test;
 
 @test:BeforeSuite
 function beforeFunction() returns error? {
@@ -35,6 +35,24 @@ function beforeFunction() returns error? {
         char_type CHAR(15),
         varchar_type VARCHAR(20)
     )
+    `);
+    _ = check dbClient->execute(`
+        CREATE OR REPLACE FUNCTION NumericProcedure(
+            row_id_in BIGINT,
+            int_type_in INTEGER,
+            bigint_type_in BIGINT,
+            double_type_in DOUBLE PRECISION
+        )
+        RETURNS VOID LANGUAGE plpgsql AS $$
+        BEGIN
+            INSERT INTO NumericTypes (
+                row_id, int_type, bigint_type, double_type
+            )
+            VALUES (
+                row_id_in, int_type_in, bigint_type_in, double_type_in
+            );
+        END;
+        $$;
     `);
     check dbClient.close();
 }
