@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [Improve documentation](https://github.com/ballerina-platform/ballerina-library/issues/5997)
 
+### Changed
+
+- [Add test coverage](https://github.com/ballerina-platform/ballerina-library/issues/6025)
+
 ## [1.0.0] - 2024-01-26
 
 ### Added
