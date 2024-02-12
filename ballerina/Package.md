@@ -68,7 +68,7 @@ configurable string jdbcUrl = ?;
 configurable string user = ?;
 configurable string password = ?;
 
-redshift:Client dbClient = check new (jdbcUrl, user, password);
+redshift:Client redshift = check new (jdbcUrl, user, password);
 ```
 
 ### Step 3: Invoke the connector operation
@@ -85,7 +85,7 @@ type User record {|
 |};
 
 sql:ParameterizedQuery sqlQuery = `SELECT * FROM Users limit 10`;
-stream<User, error?> resultStream = dbClient->query(sqlQuery);
+stream<User, error?> resultStream = redshift->query(sqlQuery);
 check from User user in resultStream
    do {
       io:println("Full details of users: ", user);
@@ -96,7 +96,7 @@ check from User user in resultStream
 ```ballerina
 sql:ParameterizedQuery sqlQuery = `INSERT INTO your_table_name (firstname, lastname, state, email, username)
    VALUES ('Cody', 'Moss', 'ON', 'dolor.nonummy@ipsumdolorsit.ca', 'WWZ18EOX');`;
-_ = check dbClient->execute(sqlQuery);
+_ = check redshift->execute(sqlQuery);
 ```
 
 ## Examples
