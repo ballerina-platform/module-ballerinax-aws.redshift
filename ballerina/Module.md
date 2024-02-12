@@ -54,8 +54,8 @@ To use the `aws.redshift` connector in your Ballerina application, modify the `.
 Import the `ballerinax/aws.redshift` package and the `ballerinax/aws.redshift.driver` into your Ballerina project.
 
 ```ballerina
-import ballerinax/aws.redshift; // Get the AWS Redshift connector
-import ballerinax/aws.redshift.driver as _; // Get the AWS Redshift driver
+import ballerinax/aws.redshift;
+import ballerinax/aws.redshift.driver as _;
 ```
 
 ### Step 2: Instantiate a new client
@@ -63,12 +63,10 @@ import ballerinax/aws.redshift.driver as _; // Get the AWS Redshift driver
 Create a `redshift:Client` with the values obtained in the previous steps.
 
 ```ballerina
-// Connection Configurations
 configurable string jdbcUrl = ?;
 configurable string user = ?;
 configurable string password = ?;
 
-// Initialize the Redshift client
 redshift:Client dbClient = check new (jdbcUrl, user, password);
 ```
 
@@ -79,7 +77,6 @@ Now, utilize the available connector operations.
 #### Read data from the database
 
 ```ballerina
-// Create the result record to match the columns of the table being queried.
 type User record {|
     string name;
     string email;
