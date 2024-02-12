@@ -52,7 +52,7 @@ To use the `aws.redshift` connector in your Ballerina application, modify the `.
 
 ### Step 1: Import the connector
 
-Import the `ballerinax/aws.redshift` package and the `ballerinax/aws.redshift.driver` into your Ballerina project.
+Import the `ballerinax/aws.redshift` package and the `ballerinax/aws.redshift.driver` package.
 
 ```ballerina
 import ballerinax/aws.redshift; 

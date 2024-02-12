@@ -10,7 +10,7 @@ The `ballerinax/aws.redshift` connector facilitates seamless integration with Am
 
 ## Prerequisites
 
-1. Follow the [instructions](https://github.com/ballerina-platform/module-ballerinax-aws.redshift#set-up-guide) to set up the AWS Redshift cluster.
+1. Follow the [instructions](https://github.com/ballerina-platform/module-ballerinax-aws.redshift#setup-guide) to set up the AWS Redshift cluster.
 
 2. For each example, create a new Ballerina project. Copy the provided example code into the project, and include a `config.toml` file with the necessary JDBC URL, username, and password. Below is an example illustrating how your `config.toml` file should be structured:
     ```toml
