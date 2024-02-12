@@ -3,15 +3,15 @@
 
 The `ballerinax/aws.redshift` connector facilitates seamless integration with Amazon Redshift, offering Ballerina users a convenient and expressive way to connect, query, and interact with Redshift clusters.
 
-## Set up guide
+## Setup guide
 
 To effectively utilize the Ballerina AWS Redshift connector, you must have an Amazon Redshift cluster. Follow these steps to create an AWS Redshift cluster.
 
-### Step 1: Login to AWS Console
+### Step 1: Login to AWS console
 
 1. Begin by logging into the [AWS Management Console](https://aws.amazon.com/).
 
-### Step 2: Navigate to Amazon Redshift and Create a Cluster
+### Step 2: Navigate to Amazon Redshift and create a cluster
 
 1. In the AWS Console, navigate to the Amazon Redshift service. Click on the "Create cluster" button to initiate the process of creating a new Amazon Redshift cluster.
 
@@ -19,7 +19,7 @@ To effectively utilize the Ballerina AWS Redshift connector, you must have an Am
 
    ![Create cluster](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-aws.redshift/master/docs/setup/resources/create-cluster-2.png)
 
-### Step 3: Configure Cluster Settings
+### Step 3: Configure cluster settings
 
 1. Follow the on-screen instructions to configure your Redshift cluster settings, including cluster identifier, database name, credentials, and other relevant parameters.
 
@@ -35,7 +35,7 @@ To effectively utilize the Ballerina AWS Redshift connector, you must have an Am
 
 4. Finally, review your configuration settings, and once satisfied, click "Create cluster" to launch your Amazon Redshift cluster.
 
-### Step 4: Wait for Cluster Availability
+### Step 4: Wait for cluster availability
 
 1. It may take some time for your Redshift cluster to be available. Monitor the cluster status in the AWS Console until it shows as "Available".
 
