@@ -4,15 +4,15 @@
 
 The `ballerinax/aws.redshift` connector facilitates seamless integration with Amazon Redshift, offering Ballerina users a convenient and expressive way to connect, query, and interact with Redshift clusters.
 
-## Set up guide
+## Setup guide
 
 To effectively utilize the Ballerina AWS Redshift connector, you must have an Amazon Redshift cluster. Follow these steps to create an AWS Redshift cluster.
 
-### Step 1: Login to AWS Console
+### Step 1: Login to AWS console
 
 1. Begin by logging into the [AWS Management Console](https://aws.amazon.com/).
 
-### Step 2: Navigate to Amazon Redshift and Create a Cluster
+### Step 2: Navigate to Amazon Redshift and create a cluster
 
 1. In the AWS Console, navigate to the Amazon Redshift service. Click on the "Create cluster" button to initiate the process of creating a new Amazon Redshift cluster.
 
@@ -20,7 +20,7 @@ To effectively utilize the Ballerina AWS Redshift connector, you must have an Am
 
    ![Create cluster](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-aws.redshift/master/docs/setup/resources/create-cluster-2.png)
 
-### Step 3: Configure Cluster Settings
+### Step 3: Configure cluster settings
 
 1. Follow the on-screen instructions to configure your Redshift cluster settings, including cluster identifier, database name, credentials, and other relevant parameters.
 
@@ -36,7 +36,7 @@ To effectively utilize the Ballerina AWS Redshift connector, you must have an Am
 
 4. Finally, review your configuration settings, and once satisfied, click "Create cluster" to launch your Amazon Redshift cluster.
 
-### Step 4: Wait for Cluster Availability
+### Step 4: Wait for cluster availability
 
 1. It may take some time for your Redshift cluster to be available. Monitor the cluster status in the AWS Console until it shows as "Available".
 
@@ -52,11 +52,11 @@ To use the `aws.redshift` connector in your Ballerina application, modify the `.
 
 ### Step 1: Import the connector
 
-Import the `ballerinax/aws.redshift` package and the `ballerinax/aws.redshift.driver` into your Ballerina project.
+Import `ballerinax/aws.redshift` and `ballerinax/aws.redshift.driver` modules.
 
 ```ballerina
-import ballerinax/aws.redshift; // Get the AWS Redshift connector
-import ballerinax/aws.redshift.driver as _; // Get the AWS Redshift driver
+import ballerinax/aws.redshift; 
+import ballerinax/aws.redshift.driver as _; 
 ```
 
 ### Step 2: Instantiate a new client
@@ -64,13 +64,11 @@ import ballerinax/aws.redshift.driver as _; // Get the AWS Redshift driver
 Create a `redshift:Client` with the values obtained in the previous steps.
 
 ```ballerina
-// Connection Configurations
 configurable string jdbcUrl = ?;
 configurable string user = ?;
 configurable string password = ?;
 
-// Initialize the Redshift client
-redshift:Client dbClient = check new (jdbcUrl, user, password);
+redshift:Client redshift = check new (jdbcUrl, user, password);
 ```
 
 ### Step 3: Invoke the connector operation
@@ -80,7 +78,6 @@ Now, utilize the available connector operations.
 #### Read data from the database
 
 ```ballerina
-// Create the result record to match the columns of the table being queried.
 type User record {|
     string name;
     string email;
@@ -88,7 +85,7 @@ type User record {|
 |};
 
 sql:ParameterizedQuery sqlQuery = `SELECT * FROM Users limit 10`;
-stream<User, error?> resultStream = dbClient->query(sqlQuery);
+stream<User, error?> resultStream = redshift->query(sqlQuery);
 check from User user in resultStream
    do {
       io:println("Full details of users: ", user);
@@ -99,7 +96,7 @@ check from User user in resultStream
 ```ballerina
 sql:ParameterizedQuery sqlQuery = `INSERT INTO your_table_name (firstname, lastname, state, email, username)
    VALUES ('Cody', 'Moss', 'ON', 'dolor.nonummy@ipsumdolorsit.ca', 'WWZ18EOX');`;
-_ = check dbClient->execute(sqlQuery);
+_ = check redshift->execute(sqlQuery);
 ```
 
 ## Examples
