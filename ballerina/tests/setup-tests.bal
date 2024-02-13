@@ -54,5 +54,20 @@ function beforeFunction() returns error? {
         END;
         $$;
     `);
+    _ = check dbClient->execute(`
+        CREATE TABLE IF NOT EXISTS users (
+        user_id INT,
+        username VARCHAR(255),
+        email VARCHAR(255),
+        age INT
+    );
+    `);
+
+    _ = check dbClient->execute(`
+        INSERT INTO users (user_id, username, email, age) VALUES
+        (1, 'JohnDoe', 'john.doe@example.com', 25),
+        (2, 'JaneSmith', 'jane.smith@example.com', 30),
+        (3, 'BobJohnson', 'bob.johnson@example.com', 22);
+    `);
     check dbClient.close();
 }

@@ -51,13 +51,4 @@ public final class Constants {
     }
     public static final String CONNECT_TIMEOUT = ".*(connect).*(timeout).*";
     public static final String POOL_CONNECTION_TIMEOUT = "ConnectionTimeout";
-
-    /**
-     * Constants for Request Generated Keys field.
-     */
-    public static final class RequestGeneratedKeysValues {
-        public static final String ALL = "ALL";
-        public static final String EXECUTE = "EXECUTE";
-        public static final String BATCH_EXECUTE = "BATCH_EXECUTE";
-    }
 }
