@@ -71,3 +71,21 @@ function beforeFunction() returns error? {
     `);
     check dbClient.close();
 }
+
+@test:AfterSuite
+function afterFunction() returns error? {
+    log:printInfo("Cleaning up resources");
+
+    Client dbClient = check new (jdbcUrl, user, password);
+
+    // Drop the function first
+    _ = check dbClient->execute(`DROP FUNCTION IF EXISTS NumericProcedure(BIGINT, INTEGER, BIGINT, DOUBLE PRECISION)`);
+
+    // Drop tables in reverse order
+    _ = check dbClient->execute(`DROP TABLE IF EXISTS users`);
+    _ = check dbClient->execute(`DROP TABLE IF EXISTS CharacterTypes`);
+    _ = check dbClient->execute(`DROP TABLE IF EXISTS NumericTypes`);
+    _ = check dbClient->execute(`DROP TABLE IF EXISTS Student`);
+
+    check dbClient.close();
+}
