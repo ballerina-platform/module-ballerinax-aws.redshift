@@ -16,6 +16,7 @@
 
 import ballerina/sql;
 import ballerina/test;
+import ballerina/io;
 
 @test:Config {
     groups: ["procedures"]
@@ -42,6 +43,23 @@ function testNumericProcedureCall() returns error? {
         double_type: 123.456
     };
     test:assertEquals(check queryProcedureClient(query, NumericProcedureRecord), expectedDataRow, "Numeric Call procedure insert and query did not match.");
+}
+
+@test:Config {
+    groups: ["procedures"]
+}
+function testStoredProcedureWithCursor() returns error? {
+    Client dbClient = check new (jdbcUrl, user, password);
+    transaction {
+        sql:CursorOutParameter mycursor = new ();
+        sql:ProcedureCallResult result = check dbClient->call(`{CALL GetUserInfo(${mycursor})}`);
+        stream<record {}, sql:Error?> resultSet = mycursor.get();
+        check commit;
+        check from record {} user in resultSet
+            do {
+                io:println(user);
+            };
+    }
 }
 
 function callProcedure(sql:ParameterizedCallQuery sqlQuery, typedesc<record {}>[] rowTypes = []) returns sql:ProcedureCallResult|error {
