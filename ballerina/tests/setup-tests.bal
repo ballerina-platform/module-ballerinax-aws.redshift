@@ -69,6 +69,19 @@ function beforeFunction() returns error? {
         (2, 'JaneSmith', 'jane.smith@example.com', 30),
         (3, 'BobJohnson', 'bob.johnson@example.com', 22);
     `);
+
+    _ = check dbClient->execute(`
+        CREATE OR REPLACE FUNCTION GetUserInfo(OUT curName refcursor)
+        LANGUAGE plpgsql
+        AS $$
+        BEGIN
+            OPEN curName FOR
+            SELECT user_id, username, email, age
+            FROM users;
+        END;
+        $$;
+    `);
+
     check dbClient.close();
 }
 
