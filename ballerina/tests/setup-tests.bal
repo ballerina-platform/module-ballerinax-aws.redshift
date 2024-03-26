@@ -99,6 +99,7 @@ function afterFunction() returns error? {
     _ = check dbClient->execute(`DROP TABLE IF EXISTS CharacterTypes`);
     _ = check dbClient->execute(`DROP TABLE IF EXISTS NumericTypes`);
     _ = check dbClient->execute(`DROP TABLE IF EXISTS Student`);
+    _ = check dbClient->execute(`DROP TABLE IF EXISTS DataTypesTest`);
 
     check dbClient.close();
 }
