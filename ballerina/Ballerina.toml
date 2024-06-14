@@ -15,8 +15,8 @@ graalvmCompatible = true
 [[platform.java11.dependency]]
 groupId = "io.ballerina.stdlib"
 artifactId = "aws.redshift-native"
-version = "1.0.3-SNAPSHOT"
-path = "../native/build/libs/aws.redshift-native-1.0.3-SNAPSHOT.jar"
+version = "1.0.3"
+path = "../native/build/libs/aws.redshift-native-1.0.3.jar"
 
 [[platform.java11.dependency]]
 groupId = "io.ballerina.stdlib"
