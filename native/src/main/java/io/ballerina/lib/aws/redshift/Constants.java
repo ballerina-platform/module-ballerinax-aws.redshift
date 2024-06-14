@@ -49,6 +49,6 @@ public final class Constants {
         public static final BString SSL_MODE_VERIFY_FULL_ARG = StringUtils.fromString("verify-full");
         public static final BString SSL_MODE_PROP = StringUtils.fromString("sslmode");
     }
-    public static final String CONNECT_TIMEOUT = ".*(connect).*(timeout).*";
+    public static final String CONNECT_TIMEOUT = "connectTimeout";
     public static final String POOL_CONNECTION_TIMEOUT = "ConnectionTimeout";
 }
