@@ -97,7 +97,7 @@ task startDatabaseServer() {
             if (!stdOut.toString().contains("server-redshift-1")) {
                 println "Starting Redshift server."
                 exec {
-                    commandLine 'sh', '-c', "docker-compose -f tests/server/docker-compose.yaml up -d"
+                    commandLine 'sh', '-c', "docker compose -f tests/server/compose.yaml up -d"
                     standardOutput = stdOut
                 }
                 println stdOut.toString()
@@ -120,7 +120,7 @@ task stopDatabaseServer() {
             if (stdOut.toString().contains("server-redshift-1")) {
                 println "Stopping RabbitMQ server."
                 exec {
-                    commandLine 'sh', '-c', "docker-compose -f tests/server/docker-compose.yaml rm -svf"
+                    commandLine 'sh', '-c', "docker compose -f tests/server/compose.yaml rm -svf"
                     standardOutput = stdOut
                 }
                 println stdOut.toString()
