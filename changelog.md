@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- [Fix strand hanging when strand count exceeds BALLERINA_SQL_MAX_POOL_SIZE](https://github.com/ballerina-platform/ballerina-library/issues/7244)
+
+## [1.0.1] - 2024-02-13
+
 ### Added
 
 - [Improve documentation](https://github.com/ballerina-platform/ballerina-library/issues/5997)
