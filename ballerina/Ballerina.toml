@@ -7,18 +7,18 @@ keywords = ["Data Warehouse", "Columnar Storage", "Cost/Paid", "vendor/aws"]
 repository = "https://github.com/ballerina-platform/module-ballerinax-aws.redshift"
 icon = "icon.png"
 license = ["Apache-2.0"]
-distribution = "2201.9.0"
+distribution = "2201.11.0-20241117-133400-a3054b77"
 
-[platform.java17]
+[platform.java21]
 graalvmCompatible = true
 
-[[platform.java17.dependency]]
+[[platform.java21.dependency]]
 groupId = "io.ballerina.stdlib"
 artifactId = "aws.redshift-native"
 version = "1.1.1-SNAPSHOT"
 path = "../native/build/libs/aws.redshift-native-1.1.1-SNAPSHOT.jar"
 
-[[platform.java17.dependency]]
+[[platform.java21.dependency]]
 groupId = "io.ballerina.stdlib"
 artifactId = "sql-native"
 version = "1.13.3"
