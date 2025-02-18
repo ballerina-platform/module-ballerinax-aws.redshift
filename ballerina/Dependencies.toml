@@ -5,12 +5,12 @@
 
 [ballerina]
 dependencies-toml-version = "2"
-distribution-version = "2201.11.0-20241117-133400-a3054b77"
+distribution-version = "2201.11.0"
 
 [[package]]
 org = "ballerina"
 name = "auth"
-version = "2.12.0"
+version = "2.13.0"
 scope = "testOnly"
 dependencies = [
 	{org = "ballerina", name = "crypto"},
@@ -53,8 +53,18 @@ dependencies = [
 
 [[package]]
 org = "ballerina"
+name = "data.jsondata"
+version = "1.0.0"
+scope = "testOnly"
+dependencies = [
+	{org = "ballerina", name = "jballerina.java"},
+	{org = "ballerina", name = "lang.object"}
+]
+
+[[package]]
+org = "ballerina"
 name = "file"
-version = "1.10.0"
+version = "1.11.0"
 scope = "testOnly"
 dependencies = [
 	{org = "ballerina", name = "io"},
@@ -66,13 +76,14 @@ dependencies = [
 [[package]]
 org = "ballerina"
 name = "http"
-version = "2.13.0"
+version = "2.13.2"
 scope = "testOnly"
 dependencies = [
 	{org = "ballerina", name = "auth"},
 	{org = "ballerina", name = "cache"},
 	{org = "ballerina", name = "constraint"},
 	{org = "ballerina", name = "crypto"},
+	{org = "ballerina", name = "data.jsondata"},
 	{org = "ballerina", name = "file"},
 	{org = "ballerina", name = "io"},
 	{org = "ballerina", name = "jballerina.java"},
@@ -112,11 +123,12 @@ modules = [
 [[package]]
 org = "ballerina"
 name = "jwt"
-version = "2.13.0"
+version = "2.14.0"
 scope = "testOnly"
 dependencies = [
 	{org = "ballerina", name = "cache"},
 	{org = "ballerina", name = "crypto"},
+	{org = "ballerina", name = "io"},
 	{org = "ballerina", name = "jballerina.java"},
 	{org = "ballerina", name = "lang.int"},
 	{org = "ballerina", name = "lang.string"},
@@ -226,7 +238,7 @@ dependencies = [
 [[package]]
 org = "ballerina"
 name = "log"
-version = "2.10.0"
+version = "2.11.0"
 scope = "testOnly"
 dependencies = [
 	{org = "ballerina", name = "io"},
@@ -241,18 +253,19 @@ modules = [
 [[package]]
 org = "ballerina"
 name = "mime"
-version = "2.10.0"
+version = "2.11.0"
 scope = "testOnly"
 dependencies = [
 	{org = "ballerina", name = "io"},
 	{org = "ballerina", name = "jballerina.java"},
-	{org = "ballerina", name = "lang.int"}
+	{org = "ballerina", name = "lang.int"},
+	{org = "ballerina", name = "log"}
 ]
 
 [[package]]
 org = "ballerina"
 name = "oauth2"
-version = "2.12.0"
+version = "2.13.0"
 scope = "testOnly"
 dependencies = [
 	{org = "ballerina", name = "cache"},
@@ -390,7 +403,7 @@ modules = [
 [[package]]
 org = "ballerinax"
 name = "postgresql.driver"
-version = "1.5.1"
+version = "1.6.0"
 scope = "testOnly"
 modules = [
 	{org = "ballerinax", packageName = "postgresql.driver", moduleName = "postgresql.driver"}
