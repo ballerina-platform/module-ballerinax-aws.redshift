@@ -18,7 +18,7 @@
 import org.apache.tools.ant.taskdefs.condition.Os
 
 plugins {
-    id "com.github.spotbugs-base"
+    id "com.github.spotbugs"
     id "com.github.johnrengelman.shadow"
     id "de.undercouch.download"
     id "net.researchgate.release"
@@ -55,6 +55,20 @@ allprojects {
     ext {
         snapshotVersion = '-SNAPSHOT'
         timestampedVersionRegex = '.*-\\d{8}-\\d{6}-\\w.*\$'
+    }
+}
+
+subprojects {
+
+    configurations {
+        ballerinaStdLibs
+        jbalTools
+    }
+
+    dependencies {
+        jbalTools("org.ballerinalang:jballerina-tools:${ballerinaLangVersion}") {
+            transitive = false
+        }
     }
 }
 
