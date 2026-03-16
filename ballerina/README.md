@@ -1,8 +1,17 @@
-## Package overview
+## Overview
 
 [Amazon Redshift](https://aws.amazon.com/redshift/) is a powerful and fully-managed data warehouse service provided by Amazon Web Services (AWS), designed to efficiently analyze large datasets with high performance and scalability.
 
-The `ballerinax/aws.redshift` connector facilitates seamless integration with Amazon Redshift, offering Ballerina users a convenient and expressive way to connect, query, and interact with Redshift clusters.
+The Amazon Redshift connector facilitates seamless integration with Amazon Redshift, offering a convenient and expressive way to connect, query, and interact with Redshift clusters.
+
+### Key Features
+
+- High-performance and reliable database connectivity
+- Support for various SQL operations (Query, Execute, Batch)
+- Efficient handling of database connections and resources
+- Support for database-specific data types and features
+- Secure communication with TLS and authentication
+- GraalVM compatible for native image builds
 
 ## Setup guide
 
