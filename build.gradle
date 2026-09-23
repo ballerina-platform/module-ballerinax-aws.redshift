@@ -19,7 +19,7 @@ import org.apache.tools.ant.taskdefs.condition.Os
 
 plugins {
     id "com.github.spotbugs"
-    id "com.github.johnrengelman.shadow"
+    id "com.gradleup.shadow"
     id "de.undercouch.download"
     id "net.researchgate.release"
 }
@@ -72,9 +72,16 @@ subprojects {
     }
 }
 
-task build {
-    dependsOn(":aws.redshift-native:build")
-    dependsOn(":aws.redshift-ballerina:build")
+if (tasks.names.contains('build')) {
+    tasks.named('build') {
+        dependsOn(":aws.redshift-native:build")
+        dependsOn(":aws.redshift-ballerina:build")
+    }
+} else {
+    tasks.register('build') {
+        dependsOn(":aws.redshift-native:build")
+        dependsOn(":aws.redshift-ballerina:build")
+    }
 }
 
 def moduleVersion = project.version.replace("-SNAPSHOT", "")

@@ -17,6 +17,13 @@
  */
 
 import org.apache.tools.ant.taskdefs.condition.Os
+import org.gradle.process.ExecOperations
+
+import javax.inject.Inject
+
+abstract class BallerinaExecHelper {
+    @Inject abstract ExecOperations getExecOperations()
+}
 
 plugins {
     id 'io.ballerina.plugin'
@@ -48,7 +55,7 @@ ballerina {
     packageOrganization = packageOrg
     module = packageName
     testCoverageParam = "--code-coverage --coverage-format=xml --includes=io.ballerina.lib.aws.redshift.*:ballerinax.aws*"
-    isConnector = true
+    connector = true
     platform = "java21"
 }
 
@@ -70,8 +77,9 @@ task updateTomlFiles {
 }
 
 task commitTomlFiles {
+    def execHelper = project.objects.newInstance(BallerinaExecHelper)
     doLast {
-        project.exec {
+        execHelper.execOperations.exec {
             ignoreExitValue true
             if (Os.isFamily(Os.FAMILY_WINDOWS)) {
                 commandLine 'cmd', '/c', "git commit -m \"[Automated] Update the toml files\" Ballerina.toml Dependencies.toml"
@@ -87,16 +95,17 @@ clean {
 }
 
 task startDatabaseServer() {
+    def execHelper = project.objects.newInstance(BallerinaExecHelper)
     doLast {
         if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
             def stdOut = new ByteArrayOutputStream()
-            exec {
+            execHelper.execOperations.exec {
                 commandLine 'sh', '-c', "docker ps --filter name=server-redshift-1"
                 standardOutput = stdOut
             }
             if (!stdOut.toString().contains("server-redshift-1")) {
                 println "Starting Redshift server."
-                exec {
+                execHelper.execOperations.exec {
                     commandLine 'sh', '-c', "docker compose -f tests/server/compose.yaml up -d"
                     standardOutput = stdOut
                 }
@@ -110,16 +119,17 @@ task startDatabaseServer() {
 }
 
 task stopDatabaseServer() {
+    def execHelper = project.objects.newInstance(BallerinaExecHelper)
     doLast {
         if (!Os.isFamily(Os.FAMILY_WINDOWS)) {
             def stdOut = new ByteArrayOutputStream()
-            exec {
+            execHelper.execOperations.exec {
                 commandLine 'sh', '-c', "docker ps --filter name=server-redshift-1"
                 standardOutput = stdOut
             }
             if (stdOut.toString().contains("server-redshift-1")) {
                 println "Stopping RabbitMQ server."
-                exec {
+                execHelper.execOperations.exec {
                     commandLine 'sh', '-c', "docker compose -f tests/server/compose.yaml rm -svf"
                     standardOutput = stdOut
                 }
