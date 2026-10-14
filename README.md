@@ -2,7 +2,7 @@ Ballerina AWS Redshift Connector
 ===================
 
 [![Build](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/actions/workflows/ci.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/actions/workflows/ci.yml)
-[![Trivy](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/actions/workflows/trivy-scan.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/actions/workflows/trivy-scan.yml)
+[![Security Scan](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/actions/workflows/security-scan.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/actions/workflows/security-scan.yml)
 [![codecov](https://codecov.io/gh/ballerina-platform/module-ballerinax-aws.redshift/branch/main/graph/badge.svg)](https://codecov.io/gh/ballerina-platform/module-ballerinax-aws.redshift)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/ballerina-platform/module-ballerinax-aws.redshift.svg)](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/commits/main)
 [![GraalVM Check](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/actions/workflows/build-with-bal-test-graalvm.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-aws.redshift/actions/workflows/build-with-bal-test-graalvm.yml)
